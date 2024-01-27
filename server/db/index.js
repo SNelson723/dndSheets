@@ -1,22 +1,13 @@
-const { Sequelize } = require('sequelize');
-const mysql = require('mysql2');
+const { Sequelize, DataTypes } = require('sequelize');
+const HOST = 'localhost';
 
 const db = new Sequelize({
-  host: 'localhost',
+  host: HOST,
   dialect: 'mysql',
   username: 'root',
   database: 'dndSheets',
   password: '',
 });
-
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'dndSheets',
-});
-
-connection.connect();
-
 
 db.authenticate()
   .then(() => console.log('Database connection has been established successfully.'))
@@ -24,114 +15,117 @@ db.authenticate()
 
 const User = db.define('user', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
   character: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     defaultValue: 'Add name',
   },
   level: {
-    type: Sequelize.Integer,
+    type: DataTypes.INTEGER,
     defaultValue: 1,
   },
   race: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     defaultValue: 'Add race'
   },
   alignment: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     defaultValue: 'Add alignment'
   },
   experience: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     defaultValue: 0,
   }
 });
 
 const Stats = db.define('stat', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
   user_id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     reference: { model: User, key: 'id'},
   },
-  str: Sequelize.INTEGER,
-  dex: Sequelize.INTEGER,
-  con: Sequelize.INTEGER,
-  int: Sequelize.INTEGER,
-  wis: Sequelize.INTEGER,
-  cha: Sequelize.INTEGER,
+  str: DataTypes.INTEGER,
+  dex: DataTypes.INTEGER,
+  con: DataTypes.INTEGER,
+  int: DataTypes.INTEGER,
+  wis: DataTypes.INTEGER,
+  cha: DataTypes.INTEGER,
 });
 
 const Skills = db.define('skill', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
   user_id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     reference: { model: User, key: 'id' },
   },
-  acrobatics: Sequelize.INTEGER,
-  animalHandling: Sequelize.INTEGER,
-  arcana: Sequelize.INTEGER,
-  athletics: Sequelize.INTEGER,
-  deception: Sequelize.INTEGER,
-  history: Sequelize.INTEGER,
-  insight: Sequelize.INTEGER,
-  intimidation: Sequelize.INTEGER,
-  investigation: Sequelize.INTEGER,
-  medicine: Sequelize.INTEGER,
-  nature: Sequelize.INTEGER,
-  perception: Sequelize.INTEGER,
-  performance: Sequelize.INTEGER,
-  persuasion: Sequelize.INTEGER,
-  religion: Sequelize.INTEGER,
-  sleightOfHand: Sequelize.INTEGER,
-  stealth: Sequelize.INTEGER,
-  survival: Sequelize.INTEGER,
+  acrobatics: DataTypes.INTEGER,
+  animalHandling: DataTypes.INTEGER,
+  arcana: DataTypes.INTEGER,
+  athletics: DataTypes.INTEGER,
+  deception: DataTypes.INTEGER,
+  history: DataTypes.INTEGER,
+  insight: DataTypes.INTEGER,
+  intimidation: DataTypes.INTEGER,
+  investigation: DataTypes.INTEGER,
+  medicine: DataTypes.INTEGER,
+  nature: DataTypes.INTEGER,
+  perception: DataTypes.INTEGER,
+  performance: DataTypes.INTEGER,
+  persuasion: DataTypes.INTEGER,
+  religion: DataTypes.INTEGER,
+  sleightOfHand: DataTypes.INTEGER,
+  stealth: DataTypes.INTEGER,
+  survival: DataTypes.INTEGER,
 });
 
 const Cantrips = db.define('cantrip', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
   user_id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     reference: { model: User, key: 'id' },
   },
-  cantripOne: Sequelize.STRING,
-  cantripTWO: Sequelize.STRING,
-  cantripThree: Sequelize.STRING,
+  cantripOne: DataTypes.STRING,
+  cantripTWO: DataTypes.STRING,
+  cantripThree: DataTypes.STRING,
 });
 
 const Spells = db.define('spell', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
   user_id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     reference: { model: User, key: 'id' },
   },
-  firstLvlOne: Sequelize.STRING,
-  firstLvlTwo: Sequelize.STRING,
-  firstLvlThree: Sequelize.STRING,
+  firstLvlOne: DataTypes.STRING,
+  firstLvlTwo: DataTypes.STRING,
+  firstLvlThree: DataTypes.STRING,
 });
 
-//sync the models
 db.sync()
-  .then(() => console.log('Database synchronized'))
-  .catch((err) => console.error('Database synchronization error', err));
+  .then(() => {
+    console.log('Database synchronized');
+  })
+  .catch((err) => {
+    console.error('Database synchronization error: ', err);
+  });
 
 module.exports = {
   db,
