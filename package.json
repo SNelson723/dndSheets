@@ -2,6 +2,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
+    "@types/cors": "^2.8.17",
     "@webpack-cli/generators": "^3.0.7",
     "autoprefixer": "^10.4.17",
     "babel-loader": "^9.1.3",

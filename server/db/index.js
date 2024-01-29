@@ -100,7 +100,7 @@ const Cantrips = db.define('cantrip', {
     reference: { model: User, key: 'id' },
   },
   cantripOne: DataTypes.STRING,
-  cantripTWO: DataTypes.STRING,
+  cantripTwo: DataTypes.STRING,
   cantripThree: DataTypes.STRING,
 });
 
