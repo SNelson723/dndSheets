@@ -20,6 +20,7 @@ app.use(express.json());
 // serve up static files from the client path
 app.use(express.static(clientPath));
 
+// successfully gets all characters
 app.get('/api/users', (req, res) => {
   User.findAll()
     .then((data) => {
@@ -28,6 +29,7 @@ app.get('/api/users', (req, res) => {
     .catch((err) => console.error(err));
 });
 
+// successfully creates a character
 app.post('/api/users', (req, res) => {
   const { character, level, race, alignment, exp } = req.body;
   User.create({
@@ -46,11 +48,26 @@ app.post('/api/users', (req, res) => {
     });
 });
 
+// successfully deletes a character
 app.delete('/api/users/:id', (req, res) => {
   const { id } = req.params;
   User.destroy({ where: { id: id } })
     .then(() => res.sendStatus(200))
     .catch(err => console.error(err));
-})
+});
+
+// successfully updates character's level
+app.patch('/characterLevel/:id', (req, res) => {
+  const { id } = req.params;
+  const { level } = req.body;
+  console.log(id);
+  console.log(level);
+  User.update( { level: level }, { where: { id: id } })
+    .then(() => res.sendStatus(200))
+    .catch(err => {
+      res.status(500);
+      console.error(err);
+    })
+});
 
 module.exports = app;
