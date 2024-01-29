@@ -39,11 +39,18 @@ app.post('/api/users', (req, res) => {
   })
     .then(newUser => {
       console.log(newUser, 'Created successfully');
-      res.sendStatus(201);
+      res.status(201).send(newUser);
     })
     .catch(() => {
       res.sendStatus(500);
     });
 });
+
+app.delete('/api/users/:id', (req, res) => {
+  const { id } = req.params;
+  User.destroy({ where: { id: id } })
+    .then(() => res.sendStatus(200))
+    .catch(err => console.error(err));
+})
 
 module.exports = app;
