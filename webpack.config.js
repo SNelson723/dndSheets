@@ -6,13 +6,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
-
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 
 
 const config = {
-    entry: './src/index.js',
+    mode: 'development',
+    entry: './client/index.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
     },
@@ -22,17 +22,24 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'index.html',
-        }),
-
-        // Add your plugins here
-        // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-    ],
+            template: './client/index.html',
+            fileName: './index.html'
+        })],
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/i,
-                loader: 'babel-loader',
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env', '@babel/preset-react']
+                        }
+                    }
+                ],
             },
             {
                 test: /\.css$/i,

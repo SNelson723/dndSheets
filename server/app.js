@@ -4,12 +4,8 @@ const express = require('express');
 // setting up the server
 const app = express();
 
-
-// TODO: MOVE ALL ROUTE HANDLING TO THEIR OWN FOLDERS AND IMPORT THEM HERE TO REFACTOR AND BE MORE ORGANIZED
-
-// routes imported from the different files!!!!
-const individualUserRoute = require('./routes/individualUserRoutes');
-const createUser = require('./routes/createAndGetUsersRoutes');
+// routes imported from the different files
+const createOrGetUsers = require('./routes/createAndGetUsersRoutes');
 
 // require path
 const path = require('path');
@@ -17,7 +13,7 @@ const path = require('path');
 const cors = require('cors');
 
 //client path for bundled files
-const clientPath = path.resolve(__dirname, '../client/dist');
+const clientPath = path.resolve(__dirname, '../dist');
 
 // make sure you invoke cors() otherwise there will be a socket hangup
 app.use(cors());
@@ -26,15 +22,25 @@ app.use(express.json());
 
 
 // THIS TELLS EXPRESS THAT THIS IS THE UNDERSTOOD ENDPOINT FOR THE RESTFUL API AND ALL USER ROUTE HANDLING DONE FROM THE userRoutes.js file will be run
-app.use('/user', individualUserRoute);
-app.use('/createUser', createUser);
-
+app.use('/createOrGetUser', createOrGetUsers);
 
 // serve up static files from the client path
 app.use(express.static(clientPath));
 
+
+
 // USER'S CHARACTER REQUEST HANDLING //
 
+// successfully deletes a character
+app.delete('/user/:id', (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  User.destroy({ where: { id: id } })
+    .then(() => res.sendStatus(200))
+    .catch(err => console.error(err));
+});
+
+// successfully gets one specified user
 app.get('/user/:id', (req, res) => {
   const { id } = req.params;
   User.findOne({ where: { id: id } })
@@ -88,32 +94,27 @@ app.post('/cantrips/:id', (req, res) => {
 });
 
 // successfully updates the user's character's cantrips
-app.patch('/updateCantripsOne/:id', (req, res) => {
+app.patch('/updateCantrips/:id', (req, res) => {
   const id = Number(req.params.id);
-  const { cantripOne } = req.body;
-  if (cantripOne) {
-    Cantrips.update({ cantripOne: cantripOne }, { where: { id: id } })
-      .then(() => res.sendStatus(201))
-      .catch((error) => console.error(error));
-  }
-});
-app.patch('/updateCantripsTwo/:id', (req, res) => {
-    const id = Number(req.params.id);
-    const { cantripTwo } = req.body;
-    if (cantripTwo) {
-      Cantrips.update({ cantripTwo: cantripTwo }, { where: { id: id } })
+  const { cantripOne, cantripTwo, cantripThree } = req.body;
+  Cantrips.findOne({ where: { id: id }, attributes: ['cantripOne', 'cantripTwo', 'cantripThree'] })
+    .then((data) => {
+      console.log(data);
+      if (cantripOne !== data.cantripOne && cantripOne) {
+        data.cantripOne = cantripOne;
+      }
+      if (cantripTwo !== data.cantripTwo && cantripTwo) {
+        data.cantripTwo = cantripTwo;
+      }
+      if (cantripThree !== data.cantripThree && cantripThree) {
+        data.cantripThree = cantripThree;
+      }
+      Cantrips.update({ cantripOne: data.cantripOne, cantripTwo: data.cantripTwo, cantripThree: data.cantripThree }, { where: { id: id } })
         .then(() => res.sendStatus(201))
         .catch((error) => console.error(error));
-    }
-  });
-app.patch('/updateCantripsThree/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const { cantripThree } = req.body;
-  if (cantripThree) {
-    Cantrips.update({ cantripThree: cantripThree }, { where: { id: id } })
-      .then(() => res.sendStatus(201))
-      .catch((error) => console.error(error));
-  }
+
+    })
+    .catch(error => console.error(error));
 });
 
 // USER SPELLS REQUEST HANDLING //
@@ -147,11 +148,7 @@ app.patch('/updateSpells/:id', (req, res) => {
       if (firstLvlThree !== data.firstLvlThree && firstLvlThree) {
         data.firstLvlThree = firstLvlThree;
       }
-      Spells.update({
-        firstLvlOne: data.firstLvlOne,
-        firstLvlTwo: data.firstLvlTwo,
-        firstLvlThree: data.firstLvlThree
-      }, { where: { id: id } })
+      Spells.update({firstLvlOne: data.firstLvlOne, firstLvlTwo: data.firstLvlTwo, firstLvlThree: data.firstLvlThree}, { where: { id: id } })
         .then(() => res.sendStatus(201))
         .catch(error => console.error(error));
     })
