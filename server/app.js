@@ -7,9 +7,9 @@ const app = express();
 
 // TODO: MOVE ALL ROUTE HANDLING TO THEIR OWN FOLDERS AND IMPORT THEM HERE TO REFACTOR AND BE MORE ORGANIZED
 
-// routes imported from the different files!!!! 
-const userRoute = require('./routes/userRoutes');
-
+// routes imported from the different files!!!!
+const individualUserRoute = require('./routes/individualUserRoutes');
+const createUser = require('./routes/createAndGetUsersRoutes');
 
 // require path
 const path = require('path');
@@ -26,7 +26,8 @@ app.use(express.json());
 
 
 // THIS TELLS EXPRESS THAT THIS IS THE UNDERSTOOD ENDPOINT FOR THE RESTFUL API AND ALL USER ROUTE HANDLING DONE FROM THE userRoutes.js file will be run
-app.use('/user', userRoute);
+app.use('/user', individualUserRoute);
+app.use('/createUser', createUser);
 
 
 // serve up static files from the client path
@@ -34,40 +35,11 @@ app.use(express.static(clientPath));
 
 // USER'S CHARACTER REQUEST HANDLING //
 
-// successfully gets all characters
-app.get('/api/users', (req, res) => {
-  User.findAll()
-    .then((data) => {
-      res.status(200).send(data)
-    })
-    .catch((err) => console.error(err));
-});
-
-// successfully creates a character
-app.post('/api/users', (req, res) => {
-  const { character, level, race, alignment, exp } = req.body;
-  User.create({
-    character: character,
-    level: level,
-    race: race,
-    alignment: alignment,
-    experience: exp,
-  })
-    .then(newUser => {
-      console.log(newUser, 'Created successfully');
-      res.status(201).send(newUser);
-    })
-    .catch(() => {
-      res.sendStatus(500);
-    });
-});
-
-// successfully deletes a character
-app.delete('/api/users/:id', (req, res) => {
+app.get('/user/:id', (req, res) => {
   const { id } = req.params;
-  User.destroy({ where: { id: id } })
-    .then(() => res.sendStatus(200))
-    .catch(err => console.error(err));
+  User.findOne({ where: { id: id } })
+    .then(data => res.status(200).send(data))
+    .catch(error => console.error(error));
 });
 
 // successfully updates character's level
