@@ -1,7 +1,5 @@
-// require express
 const express = require('express');
 const router = express.Router();
-
 
 const { User, Spells, Cantrips } = require('../db/index');
 
