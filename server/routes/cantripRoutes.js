@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { Cantrips } = require('../db/index');
+// const Cantrips = require('../db/models/cantripsModel');
 
 router.get('/', (req, res) => {
   Cantrips.findAll()

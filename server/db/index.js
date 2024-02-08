@@ -1,4 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
+
+const User = require('./models/userModel');
+// const Cantrips = require('./models/cantripsModel');
+
 const HOST = 'localhost';
 
 const db = new Sequelize({
@@ -13,33 +17,33 @@ db.authenticate()
   .then(() => console.log('Database connection has been established successfully.'))
   .catch((error) => console.error('Unable to connect to the database:', error));
 
-const User = db.define('user', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  character: {
-    type: DataTypes.STRING,
-    defaultValue: 'Add name',
-  },
-  level: {
-    type: DataTypes.INTEGER,
-    defaultValue: 1,
-  },
-  race: {
-    type: DataTypes.STRING,
-    defaultValue: 'Add race'
-  },
-  alignment: {
-    type: DataTypes.STRING,
-    defaultValue: 'Add alignment'
-  },
-  experience: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-  }
-});
+// const User = db.define('user', {
+//   id: {
+//     type: DataTypes.INTEGER,
+//     autoIncrement: true,
+//     primaryKey: true,
+//   },
+//   character: {
+//     type: DataTypes.STRING,
+//     defaultValue: 'Add name',
+//   },
+//   level: {
+//     type: DataTypes.INTEGER,
+//     defaultValue: 1,
+//   },
+//   race: {
+//     type: DataTypes.STRING,
+//     defaultValue: 'Add race'
+//   },
+//   alignment: {
+//     type: DataTypes.STRING,
+//     defaultValue: 'Add alignment'
+//   },
+//   experience: {
+//     type: DataTypes.INTEGER,
+//     defaultValue: 0,
+//   }
+// });
 
 const Stats = db.define('stat', {
   id: {

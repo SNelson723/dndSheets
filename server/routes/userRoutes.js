@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { User, Spells, Cantrips } = require('../db/index');
+const User = require('../db/models/userModel');
 
 // successfully gets all users in MySQL db
 router.get('/', (req, res) => {

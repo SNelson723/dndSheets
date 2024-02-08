@@ -3,10 +3,9 @@ const axios = require('axios');
 const Redis = require('redis');
 const router = express.Router();
 const client = Redis.createClient();
-// connect the client
+
 client.connect();
 
-// get all wizard spells
 router.get(`/wizardSpells`, async (req, res) => {
   // get the spells from the redis cache
   const spells = await client.get('wizardSpells');
