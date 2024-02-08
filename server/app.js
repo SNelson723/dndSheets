@@ -3,6 +3,15 @@ const { db, User, Skills, Stats, Cantrips, Spells } = require('./db/index');
 const express = require('express');
 // setting up the server
 const app = express();
+// require redis
+const Redis = require('redis');
+// require axios
+const axios = require('axios');
+// instance of redis => no args means all default params are used
+// pass in production url for production instance of redis { url: }
+const client = Redis.createClient();
+// connect the client
+client.connect();
 
 // routes imported from the different files
 const createOrGetUsers = require('./routes/createAndGetUsersRoutes');
@@ -20,14 +29,11 @@ app.use(cors());
 // using a json parser middleware
 app.use(express.json());
 
-
 // THIS TELLS EXPRESS THAT THIS IS THE UNDERSTOOD ENDPOINT FOR THE RESTFUL API AND ALL USER ROUTE HANDLING DONE FROM THE userRoutes.js file will be run
 app.use('/createOrGetUser', createOrGetUsers);
 
 // serve up static files from the client path
 app.use(express.static(clientPath));
-
-
 
 // USER'S CHARACTER REQUEST HANDLING //
 
@@ -161,6 +167,48 @@ app.get('/userSpells/:id', (req, res) => {
   Spells.findOne({ where: { id: id } })
     .then(spells => res.status(200).send(spells))
     .catch(error => console.error(error));
+});
+
+const DEFAULT_EXPIRATION = 1000;
+
+// get all wizard spells
+app.get(`/wizardSpells`, async (req, res) => {
+  // get the spells from the redis cache
+  const spells = await client.get('wizardSpells');
+  // if spells data !== null/undefined
+  if (spells) {
+    /**
+     * return the parsed json data sent back from the cache
+     * data must be parsed because redis sends back data in the form of a string
+     */
+    res.send(JSON.parse(spells));
+  } else {
+    // otherwise, make the axios request to the api/endpoint
+    try {
+      const { data } = await axios.get(`https://www.dnd5eapi.co/api/classes/wizard/spells`);
+      // set the cached data to redis => stringify so it can be stored
+      await client.setEx('wizardSpells', 3600, JSON.stringify(data));
+      // send back that data
+      res.send(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+});
+
+app.get('/allSpells', async (req, res) => {
+  const spells = await client.get('allSpells');
+  if (spells) {
+    res.send(JSON.parse(spells));
+  } else {
+    try {
+      const { data } = await axios.get('https://www.dnd5eapi.co/api/spells');
+      client.set('allSpells', JSON.stringify(data));
+      res.send(data);
+    } catch {
+      console.error(error);
+    }
+  }
 });
 
 module.exports = app;

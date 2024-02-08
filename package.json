@@ -28,7 +28,9 @@
     "watch": "webpack --watch",
     "serve": "webpack serve",
     "start": "nodemon server/index.js",
-    "syncSql": "node server/db/index.js"
+    "syncSql": "node server/db/index.js",
+    "redis": "redis-server",
+    "redisCli": "redis-cli"
   },
   "dependencies": {
     "axios": "^1.6.7",
@@ -43,6 +45,7 @@
     "nodemon": "^3.0.3",
     "react": "^18.2.0",
     "react-router-dom": "^6.21.3",
+    "redis": "^4.6.13",
     "sequelize": "^6.35.2",
     "sequelize-cli": "^6.6.2"
   },
