@@ -33,7 +33,7 @@ router.post('/:user_id', (req, res) => {
 });
 
 // successfully updates spells
-router.patch(':user_id', (req, res) => {
+router.patch('/:user_id', (req, res) => {
   const user_id = Number(req.params.user_id);
   const { firstLvlOne, firstLvlTwo, firstLvlThree } = req.body;
   Spells.findOne({ where: { user_id: user_id }, attributes: ['firstLvlOne', 'firstLvlTwo', 'firstLvlThree'] })
