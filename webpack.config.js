@@ -12,7 +12,7 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 
 const config = {
     mode: 'development',
-    entry: './client/index.jsx',
+    entry: './src/index.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
     },
@@ -22,7 +22,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './client/index.html',
+            template: './src/index.html',
             fileName: './index.html'
         })],
     resolve: {
@@ -59,10 +59,7 @@ const config = {
 module.exports = () => {
     if (isProduction) {
         config.mode = 'production';
-        
         config.plugins.push(new MiniCssExtractPlugin());
-        
-        
     } else {
         config.mode = 'development';
     }

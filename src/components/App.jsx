@@ -1,9 +1,10 @@
 import React from 'react';
 import Profile from './Profile';
+// import '../styles.scss'
 
 const App = () => {
   return (
-    <div>
+    <div className="App">
       <Profile />
     </div>
   );
