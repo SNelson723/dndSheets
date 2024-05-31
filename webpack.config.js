@@ -42,7 +42,7 @@ const config = {
                 ],
             },
             {
-                test: /\.css$/i,
+                test: /\.(css|scss)$/i,
                 use: [stylesHandler, 'css-loader', 'postcss-loader'],
             },
             {
