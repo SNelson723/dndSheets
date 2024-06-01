@@ -41,4 +41,14 @@ router.get('/allSpells', async (req, res) => {
   }
 });
 
+router.get('/getAllAbilities', (req, res) => {
+  axios.get('https://www.dnd5eapi.co/api/ability-scores')
+    .then(({data}) => {
+      let abilities = [];
+      data.results.forEach(ability => abilities.push(ability.name));
+      res.status(200).send(abilities);
+    })
+    .catch(error => console.error(error));
+});
+
 module.exports = router;

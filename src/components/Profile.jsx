@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack, Container } from 'react-bootstrap';
-import BaseStatsMap from './profileComponents/BaseStatsMap';
+import BaseStatsTable from './profileComponents/BaseStatsTable';
 
 const Profile = () => {
   const baseStats = ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
@@ -9,9 +9,8 @@ const Profile = () => {
       <h1 className="text-center">My profile!</h1>
       <div className="container-fluid header" style={{width: '50%', textAlign: 'center'}}>
         <Container id="playerNav" style={{width: '100%'}}>
-          <table style={{display: 'flex', justifyContent: 'center', width: 'auto'}}>
-            {baseStats.map(stat => <BaseStatsMap stat={stat} />)}
-          </table>
+          {/* move this table into its own component and update with database */}
+          <BaseStatsTable />
         </Container>
       </div>
       <div id="profileBody" className="mt-5 mx-auto" style={{display: 'flex', justifyContent: 'center', width: '80vw'}}>

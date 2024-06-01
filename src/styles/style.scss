@@ -19,6 +19,11 @@ body {
   height: 100vh;
 }
 
+td {
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
 .card {
   //more translucent
   background: #e9ecf313;
@@ -35,6 +40,11 @@ body {
   background-image: url('/src/images/profileHead.jpg');
   color: #242124;
   font-weight: 800;
+}
+
+.grid-container {
+  display: grid;
+  column-gap: 2rem;
 }
 
 #profileBody {
