@@ -32,7 +32,9 @@ body {
   @include blur(3px);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-  background-image: url('/src/images/profileHeader.jpg');
+  background-image: url('/src/images/profileHead.jpg');
+  color: #242124;
+  font-weight: 800;
 }
 
 #profileBody {
