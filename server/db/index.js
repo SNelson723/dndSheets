@@ -55,12 +55,12 @@ const Stats = db.define('stat', {
     type: DataTypes.INTEGER,
     reference: { model: User, key: 'id'},
   },
-  str: DataTypes.INTEGER,
-  dex: DataTypes.INTEGER,
-  con: DataTypes.INTEGER,
-  int: DataTypes.INTEGER,
-  wis: DataTypes.INTEGER,
-  cha: DataTypes.INTEGER,
+  STR: DataTypes.INTEGER,
+  DEX: DataTypes.INTEGER,
+  CON: DataTypes.INTEGER,
+  INT: DataTypes.INTEGER,
+  WIS: DataTypes.INTEGER,
+  CHA: DataTypes.INTEGER,
 });
 
 const Skills = db.define('skill', {

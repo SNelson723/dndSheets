@@ -1,9 +1,19 @@
 import React from 'react';
 import { Stack, Container } from 'react-bootstrap';
 import BaseStatsTable from './profileComponents/BaseStatsTable';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Profile = () => {
   const baseStats = ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
+  const [character, setCharacter] = useState({});
+
+  useEffect(() => {
+    axios.get('/user/3')
+      .then(({data}) => console.log(data))
+      .catch(error => console.error(error));
+  }, []);
+
   return (
     <div className='profile text-white'>
       <h1 className="text-center">My profile!</h1>

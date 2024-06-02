@@ -34,7 +34,8 @@
     "start": "nodemon server/index.js",
     "syncSql": "node server/db/index.js",
     "redis": "redis-server",
-    "redisCli": "redis-cli"
+    "redisCli": "redis-cli",
+    "seed": "npx sequelize db:drop && npx sequelize db:create && node server/db/seed.js && npx sequelize db:seed:all"
   },
   "dependencies": {
     "axios": "^1.6.7",
