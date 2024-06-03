@@ -20,7 +20,10 @@ const Profile = () => {
       <div className="container-fluid header" style={{width: '50%', textAlign: 'center'}}>
         <Container id="playerNav" style={{width: '100%'}}>
           {/* move this table into its own component and update with database */}
-          <BaseStatsTable />
+          {/* <BaseStatsTable /> */}
+          <div>
+            
+          </div>
         </Container>
       </div>
       <div id="profileBody" className="mt-5 mx-auto" style={{display: 'flex', justifyContent: 'center', width: '80vw'}}>
