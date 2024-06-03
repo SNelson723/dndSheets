@@ -10,19 +10,40 @@ const Profile = () => {
 
   useEffect(() => {
     axios.get('/user/3')
-      .then(({data}) => console.log(data))
+      .then(({data}) => {
+        console.log(data);
+        setCharacter(data);
+      })
       .catch(error => console.error(error));
   }, []);
 
   return (
     <div className='profile text-white'>
-      <h1 className="text-center">My profile!</h1>
-      <div className="container-fluid header" style={{width: '50%', textAlign: 'center'}}>
+      <div className="container-fluid header" style={{width: '65%', textAlign: 'center'}}>
         <Container id="playerNav" style={{width: '100%'}}>
           {/* move this table into its own component and update with database */}
           {/* <BaseStatsTable /> */}
-          <div>
-            
+          <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+            <div className='mx-4'>
+              <label>Name: </label>
+              <br/>
+              {character.character}
+            </div>
+            <div className='mx-4'>
+              <label>Level: </label>
+              <br/>
+              {character.level}
+            </div>
+            <div className='mx-4'>
+              <label>Race: </label>
+              <br/>
+              {character.race}
+            </div>
+            <div className='mx-4'>
+              <label>Alignment: </label>
+              <br/>
+              {character.alignment}
+            </div>
           </div>
         </Container>
       </div>
