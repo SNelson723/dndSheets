@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../db/models/userModel');
+const {User, Stats} = require('../db/models/userModel');
+const { Cantrips, Spells } = require('../db/index');
 
 // successfully gets all users in MySQL db
 router.get('/', (req, res) => {
@@ -14,6 +15,14 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   User.findOne({ where: { id: id } })
+    .then(data => res.status(200).send(data))
+    .catch(error => console.error(error));
+});
+
+// successfully gets the current character's base stats
+router.get('/stats/:id', (req, res) => {
+  const { id } = req.params;
+  Stats.findOne({ where: { id: id }})
     .then(data => res.status(200).send(data))
     .catch(error => console.error(error));
 });
@@ -73,6 +82,35 @@ router.delete('/:id', (req, res) => {
         .catch((err) => console.error(err));
     })
     .catch(err => console.error(err));
+});
+
+// still building
+router.post('/stats/:id', (req, res) =>{
+  const { id } = req.params;;
+  const { strength, dexterity, constitution, intelligence, wisdom, charisma } = req.body; // this goes to the right of the url in axios
+  Stats.create({
+    user_id: id,
+    Strength: strength,
+    Dexterity: dexterity,
+    Constitution: constitution,
+    Intelligence: intelligence,
+    Wisdom: wisdom,
+    Charisma: charisma
+  })
+    .then(newStats => {
+      console.log(newStats, 'Created Stats Successfully');
+      res.status(201).send(newStats);
+    })
+    .catch(error => console.error(error));
+});
+
+router.delete('/stats/:id', (req, res) => {
+  const { id } = req.params;
+  Stats.destroy({ where: { id: id } })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(error => console.error(error));
 });
 
 module.exports = router;

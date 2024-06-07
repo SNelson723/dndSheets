@@ -47,6 +47,9 @@ td {
   column-gap: 2rem;
 }
 
-#profileBody {
+#body-left, #body-right {
   background-image: url('/src/images/profileBody.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }

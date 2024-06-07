@@ -17,52 +17,6 @@ db.authenticate()
   .then(() => console.log('Database connection has been established successfully.'))
   .catch((error) => console.error('Unable to connect to the database:', error));
 
-// const User = db.define('user', {
-//   id: {
-//     type: DataTypes.INTEGER,
-//     autoIncrement: true,
-//     primaryKey: true,
-//   },
-//   character: {
-//     type: DataTypes.STRING,
-//     defaultValue: 'Add name',
-//   },
-//   level: {
-//     type: DataTypes.INTEGER,
-//     defaultValue: 1,
-//   },
-//   race: {
-//     type: DataTypes.STRING,
-//     defaultValue: 'Add race'
-//   },
-//   alignment: {
-//     type: DataTypes.STRING,
-//     defaultValue: 'Add alignment'
-//   },
-//   experience: {
-//     type: DataTypes.INTEGER,
-//     defaultValue: 0,
-//   }
-// });
-
-const Stats = db.define('stat', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  user_id: {
-    type: DataTypes.INTEGER,
-    reference: { model: User, key: 'id'},
-  },
-  STR: DataTypes.INTEGER,
-  DEX: DataTypes.INTEGER,
-  CON: DataTypes.INTEGER,
-  INT: DataTypes.INTEGER,
-  WIS: DataTypes.INTEGER,
-  CHA: DataTypes.INTEGER,
-});
-
 const Skills = db.define('skill', {
   id: {
     type: DataTypes.INTEGER,
@@ -133,9 +87,9 @@ db.sync()
 
 module.exports = {
   db,
-  User,
+  // User,
   Skills,
-  Stats,
+  // Stats,
   Cantrips,
   Spells
 }
