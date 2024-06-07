@@ -19,7 +19,7 @@ const Profile = () => {
 
   return (
     <div className='profile text-white'>
-      <div className="container-fluid header" style={{width: '65%', textAlign: 'center'}}>
+      <div className="container-fluid header" style={{width: '50vw', minWidth: '50vw', textAlign: 'center'}}>
         <Container id="playerNav" style={{width: '100%'}}>
           {/* move this table into its own component and update with database */}
           {/* <BaseStatsTable /> */}
