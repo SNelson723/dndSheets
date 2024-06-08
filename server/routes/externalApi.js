@@ -51,4 +51,14 @@ router.get('/getAllAbilities', (req, res) => {
     .catch(error => console.error(error));
 });
 
+router.get('/getSkills', (req, res) => {
+  axios.get('https://www.dnd5eapi.co/api/skills')
+    .then(({data}) => {
+      let skills = [];
+      data.results.forEach(skill => skills.push(skill.name));
+      res.status(200).send(skills);
+    })
+    .catch(error => console.log(error));
+});
+
 module.exports = router;
