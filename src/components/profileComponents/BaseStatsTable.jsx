@@ -10,13 +10,6 @@ const BaseStatsTable = ({ stat }) => {
   // handle the stat modifiers here when mapping
   // pull from the character table to have access to the modifiers
   useEffect(() =>{
-    // axios.get('/api/getAllAbilities')
-    //   .then(({data}) => {
-    //     console.log(data);
-    //     setAbilities(data);
-    //   })
-    //   .catch(error => console.error(error));
-
     axios.get('/user/stats/1')
       .then(({ data }) => {
         console.log(data);

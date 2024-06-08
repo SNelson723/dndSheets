@@ -22,12 +22,14 @@ const Profile = () => {
         <Container id="playerNav">
           {/* move this table into its own component and update with database */}
           <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-            <div className='mx-4'>
-              <label>Name: </label>
-              <br/>
-              {character.character}
-            </div>
-            <div className='mx-4'>
+            {Object.entries(character).map((label, i) => (
+              <div className='mx-4'>
+                <label>{label[0]}: </label>
+                <br/>
+                {label[1]}
+              </div>
+            ))}
+            {/* <div className='mx-4'>
               <label>Level: </label>
               <br/>
               {character.level}
@@ -41,7 +43,7 @@ const Profile = () => {
               <label>Alignment: </label>
               <br/>
               {character.alignment}
-            </div>
+            </div> */}
           </div>
         </Container>
       </div>

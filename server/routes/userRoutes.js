@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 // successfully gets one specified user
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  User.findOne({ where: { id: id } })
+  User.findOne({ where: { id: id }, attributes: ['character', 'level', 'race', 'alignment', 'experience'] })
     .then(data => res.status(200).send(data))
     .catch(error => console.error(error));
 });
@@ -76,13 +76,15 @@ router.delete('/:id', (req, res) => {
     .catch(err => console.error(err));
 });
 
+// works successfully
 router.get('/stats', (req, res) => {
   Stats.findAll()
     .then(data => res.status(200).send(data))
     .catch(error => console.error(error));
 });
 
-// still building
+// works successfully, just need to uncomment the req.body line
+// once user is able to create characters in character creation page
 router.post('/stats/:id', (req, res) =>{
   const { id } = req.params;;
   // const { strength, dexterity, constitution, intelligence, wisdom, charisma } = req.body; // this goes to the right of the url in axios
@@ -110,6 +112,7 @@ router.get('/stats/:id', (req, res) => {
     .catch(error => console.error(error));
 });
 
+// works successfully
 router.delete('/stats/:id', (req, res) => {
   const { id } = req.params;
   Stats.destroy({ where: { id: id } })
