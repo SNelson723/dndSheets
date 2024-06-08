@@ -23,7 +23,7 @@ const Profile = () => {
           {/* move this table into its own component and update with database */}
           <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
             {Object.entries(character).map((label, i) => (
-              <div className='mx-4'>
+              <div key={`Character-${label[0]}`} className='mx-4'>
                 <label>{label[0]}: </label>
                 <br/>
                 {label[1]}

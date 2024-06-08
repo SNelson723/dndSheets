@@ -1,11 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Stack } from 'react-bootstrap';
+import { setModifiers } from '/src/modifierFunctions';
 
 const BaseStatsTable = ({ stat }) => {
   const [abilities, setAbilities] = useState([]);
-  const baseStats = ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
 
   // handle the stat modifiers here when mapping
   // pull from the character table to have access to the modifiers
@@ -17,32 +16,6 @@ const BaseStatsTable = ({ stat }) => {
       })
       .catch(error => console.error(error));
   }, [])
-
-  const setModifiers = (ability) => {
-    if (ability < 2) {
-      return -5;
-    } else if (ability < 4) {
-      return - 4;
-    } else if (ability < 6) {
-      return -3
-    } else if (ability < 8) {
-      return -2;
-    } else if (ability < 10) {
-      return -1;
-    } else if (ability < 12) {
-      return 0;
-    } else if (ability < 14) {
-      return '+1';
-    } else if (ability < 16) {
-      return '+2';
-    } else if (ability < 18) {
-      return '+3';
-    } else if (ability < 20) {
-      return '+4';
-    } else if (ability === 20) {
-      return '+5';
-    }
-  }
 
   return (
     <div>
