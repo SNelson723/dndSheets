@@ -18,9 +18,9 @@ const BaseStatsTable = ({ stat }) => {
   }, [])
 
   return (
-    <div>
+    <div className='py-1' style={{width: '12vw'}}>
       {Object.entries(abilities).map((ability, i) => (
-        <div key={ability[0]} className="text-center text-black py-1">
+        <div key={ability[0]} className="text-center">
           <div className='' style={{display: 'flex', justifyContent: 'center'}}>
           <p id={`profile-${ability[0]}`} className='text-left' style={{marginRight: '0.5rem'}}>{ability[0]}</p>
           <label className='text-right' htmlFor={`profile-${ability[0]}`}>{setModifiers(ability[1])}</label>

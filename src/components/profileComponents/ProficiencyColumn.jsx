@@ -5,20 +5,23 @@ const ProficiencyColumn = ({ level }) => {
   const [profBonus, setProfBonus] = useState('');
 
   useEffect(() => {
-    setProfBonus(setProficiencyMod(level))
-  });
+    // setProfBonus(setProficiencyMod(level))
+  }, []);
 
   return (
-    <div>
-      <div style={{display: 'flex'}}>
-        <p className="text-center pr-2">{profBonus}</p>
+    <div className="py-1" style={{width: '18vw'}}>
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+        <p className="text-center px-2">{setProficiencyMod(level)}</p>
         <label>Proficiency Bonus</label>
       </div>
-      <div>
+      <div style={{display: 'flex', justifyContent: 'center'}}>
         {/* Set up inspiration */}
-        {/* Set up saving throws */}
-        {/* Set up proficiencies */}
+        <p className="text-center px-2">5</p>
+        <label>Inspiration</label>
       </div>
+        {/* Set up saving throws */}
+        
+        {/* Set up proficiencies */}
     </div>
   );
 }
