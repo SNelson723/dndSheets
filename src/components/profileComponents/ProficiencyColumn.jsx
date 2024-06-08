@@ -16,11 +16,12 @@ const ProficiencyColumn = ({ level, abilities }) => {
         <label>Inspiration</label>
       </div>
         {/* Set up saving throws */}
-        <div style={{border: '1px solid black'}}>
+        <div style={{border: '1px solid black', borderRadius: '6px'}}>
           {Object.entries(abilities).map(ability => (
-            <div key={`${ability[0]}_saving_throw`} className="text-center">
-              <label></label>
-              <p className="text-center" style={{borderBottom: '2px solid black', width: '1rem'}}> </p>
+            <div className="mx-2" key={`${ability[0]}_saving_throw`} style={{display: 'flex', justifyContent:'left'}}>
+              <label>+</label>
+              <p className="text-center" style={{borderBottom: '2px solid black', width: '1rem'}}> 3</p>
+              <p>{ability[0]}</p>
             </div>
           ))}
         </div>
