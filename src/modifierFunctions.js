@@ -12,15 +12,15 @@ const setModifiers = (ability) => {
   } else if (ability < 12) {
     return 0;
   } else if (ability < 14) {
-    return '+1';
+    return 1;
   } else if (ability < 16) {
-    return '+2';
+    return 2;
   } else if (ability < 18) {
-    return '+3';
+    return 3;
   } else if (ability < 20) {
-    return '+4';
+    return 4;
   } else if (ability === 20) {
-    return '+5';
+    return 5;
   }
 };
 

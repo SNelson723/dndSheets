@@ -7,14 +7,23 @@ import axios from 'axios';
 
 const Profile = () => {
   const [character, setCharacter] = useState({});
+  const [abilities, setAbilities] = useState([]);
 
   useEffect(() => {
+    // gonna need to change the 1 to the actual logged in user's id
     axios.get('/user/1')
       .then(({data}) => {
         console.log(data);
         setCharacter(data);
       })
       .catch(error => console.error(error));
+
+      axios.get('/user/stats/1')
+        .then(({ data }) => {
+          console.log(data);
+          setAbilities(data);
+        })
+        .catch(error => console.error(error));
   }, []);
 
   return (
@@ -37,8 +46,8 @@ const Profile = () => {
         <Stack direction="horizontal" gap="3" className="text-center" id="profile-sections">
           <div id="body-left" className='mx-auto pr-3' style={{width: '30vw', display: 'flex'}}>
             {/* This is where stats and proficiencies will be held */}
-          <BaseStatsTable />
-          <ProficiencyColumn level={character.level} />
+          <BaseStatsTable abilities={abilities} />
+          <ProficiencyColumn abilities={abilities} level={character.level} />
           </div>
           <div id="body-right" className='mx-auto pl-3 text-white' style={{width: '60vw'}}>
             Right Side
