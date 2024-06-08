@@ -29,31 +29,16 @@ const Profile = () => {
                 {label[1]}
               </div>
             ))}
-            {/* <div className='mx-4'>
-              <label>Level: </label>
-              <br/>
-              {character.level}
-            </div>
-            <div className='mx-4'>
-              <label>Race: </label>
-              <br/>
-              {character.race}
-            </div>
-            <div className='mx-4'>
-              <label>Alignment: </label>
-              <br/>
-              {character.alignment}
-            </div> */}
           </div>
         </Container>
       </div>
       <div id="profileBody" className="mt-5 mx-auto" style={{display: 'flex', justifyContent: 'center', width: '90vw', borderRadius: '10px'}}>
         <Stack direction="horizontal" gap="3" className="text-center" id="profile-sections">
-          <div id="body-left" className='mx-auto pr-3 text-white' style={{width: '10vw'}}>
+          <div id="body-left" className='mx-auto pr-3 text-white' style={{width: '15vw'}}>
             {/* This is where stats and proficiencies will be held */}
           <BaseStatsTable />
           </div>
-          <div id="body-right" className='mx-auto pl-3 text-white' style={{width: '80vw'}}>
+          <div id="body-right" className='mx-auto pl-3 text-white' style={{width: '75vw'}}>
             Right Side
             {/* This is where the gear, features will be held */}
           </div>
