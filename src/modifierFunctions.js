@@ -22,8 +22,23 @@ const setModifiers = (ability) => {
   } else if (ability === 20) {
     return '+5';
   }
-}
+};
+
+const setProficiencyMod = (lvl) => {
+  if (lvl < 5) {
+    return '+2';
+  } else if (lvl < 9) {
+    return '+3';
+  } else if (lvl < 13) {
+    return '+4';
+  } else if (lvl < 17) {
+    return '+5';
+  } else if (lvl <= 20) {
+    return '+6';
+  }
+};
 
 module.exports = {
-  setModifiers
+  setModifiers,
+  setProficiencyMod
 }

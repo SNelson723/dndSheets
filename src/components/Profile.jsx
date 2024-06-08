@@ -2,6 +2,7 @@ import React from 'react';
 import { Stack, Container } from 'react-bootstrap';
 import BaseStatsTable from './profileComponents/BaseStatsTable';
 import { useState, useEffect } from 'react';
+import ProficiencyColumn from './profileComponents/ProficiencyColumn';
 import axios from 'axios';
 
 const Profile = () => {
@@ -34,11 +35,12 @@ const Profile = () => {
       </div>
       <div id="profileBody" className="mt-5 mx-auto" style={{display: 'flex', justifyContent: 'center', width: '90vw', borderRadius: '10px'}}>
         <Stack direction="horizontal" gap="3" className="text-center" id="profile-sections">
-          <div id="body-left" className='mx-auto pr-3 text-white' style={{width: '15vw'}}>
+          <div id="body-left" className='mx-auto pr-3 text-white' style={{width: '30vw'}}>
             {/* This is where stats and proficiencies will be held */}
           <BaseStatsTable />
+          <ProficiencyColumn />
           </div>
-          <div id="body-right" className='mx-auto pl-3 text-white' style={{width: '75vw'}}>
+          <div id="body-right" className='mx-auto pl-3 text-white' style={{width: '60vw'}}>
             Right Side
             {/* This is where the gear, features will be held */}
           </div>
