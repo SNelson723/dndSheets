@@ -5,11 +5,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Profile = () => {
-  const baseStats = ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
   const [character, setCharacter] = useState({});
 
   useEffect(() => {
-    axios.get('/user/3')
+    axios.get('/user/1')
       .then(({data}) => {
         console.log(data);
         setCharacter(data);

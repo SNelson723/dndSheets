@@ -17,7 +17,7 @@ const BaseStatsTable = ({ stat }) => {
     //   })
     //   .catch(error => console.error(error));
 
-    axios.get('/user/stats/3')
+    axios.get('/user/stats/1')
       .then(({ data }) => {
         console.log(data);
         setAbilities(data);
@@ -25,16 +25,42 @@ const BaseStatsTable = ({ stat }) => {
       .catch(error => console.error(error));
   }, [])
 
+  const setModifiers = (ability) => {
+    if (ability < 2) {
+      return -5;
+    } else if (ability < 4) {
+      return - 4;
+    } else if (ability < 6) {
+      return -3
+    } else if (ability < 8) {
+      return -2;
+    } else if (ability < 10) {
+      return -1;
+    } else if (ability < 12) {
+      return 0;
+    } else if (ability < 14) {
+      return '+1';
+    } else if (ability < 16) {
+      return '+2';
+    } else if (ability < 18) {
+      return '+3';
+    } else if (ability < 20) {
+      return '+4';
+    } else if (ability === 20) {
+      return '+5';
+    }
+  }
+
   return (
     <div>
-      {baseStats.map((ability, i) => (
-        <div className="text-center text-black py-2">
-          <div className='fs-4' style={{display: 'flex'}}>
-          <p id={`profile-${ability}`} className='text-left'>{ability}</p>
-          <label className='text-right' for={`profile-${ability}`}>+3</label>
+      {Object.entries(abilities).map((ability, i) => (
+        <div key={ability[0]} className="text-center text-black py-1">
+          <div className='' style={{display: 'flex', justifyContent: 'center'}}>
+          <p id={`profile-${ability[0]}`} className='text-left' style={{marginRight: '0.5rem'}}>{ability[0]}</p>
+          <label className='text-right' htmlFor={`profile-${ability[0]}`}>{setModifiers(ability[1])}</label>
           </div>
-          <div className='fs-5 text-center'>
-            Actual Number
+          <div className='text-center'>
+            {ability[1]}
           </div>
         </div>
       ))}

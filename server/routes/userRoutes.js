@@ -19,14 +19,6 @@ router.get('/:id', (req, res) => {
     .catch(error => console.error(error));
 });
 
-// successfully gets the current character's base stats
-router.get('/stats/:id', (req, res) => {
-  const { id } = req.params;
-  Stats.findOne({ where: { id: id }})
-    .then(data => res.status(200).send(data))
-    .catch(error => console.error(error));
-});
-
 // successfully creates a character in MySQL db
 router.post('/', (req, res) => {
   const { character, level, race, alignment } = req.body;
@@ -84,23 +76,37 @@ router.delete('/:id', (req, res) => {
     .catch(err => console.error(err));
 });
 
+router.get('/stats', (req, res) => {
+  Stats.findAll()
+    .then(data => res.status(200).send(data))
+    .catch(error => console.error(error));
+});
+
 // still building
 router.post('/stats/:id', (req, res) =>{
   const { id } = req.params;;
-  const { strength, dexterity, constitution, intelligence, wisdom, charisma } = req.body; // this goes to the right of the url in axios
+  // const { strength, dexterity, constitution, intelligence, wisdom, charisma } = req.body; // this goes to the right of the url in axios
   Stats.create({
     user_id: id,
-    Strength: strength,
-    Dexterity: dexterity,
-    Constitution: constitution,
-    Intelligence: intelligence,
-    Wisdom: wisdom,
-    Charisma: charisma
+    Strength: 15,
+    Dexterity: 13,
+    Constitution: 15,
+    Intelligence: 12,
+    Wisdom: 8,
+    Charisma: 10
   })
     .then(newStats => {
       console.log(newStats, 'Created Stats Successfully');
       res.status(201).send(newStats);
     })
+    .catch(error => console.error(error));
+});
+
+// successfully gets the current character's base stats
+router.get('/stats/:id', (req, res) => {
+  const { id } = req.params;
+  Stats.findOne({ where: { user_id: id }, attributes: ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']})
+    .then(data => res.status(200).send(data))
     .catch(error => console.error(error));
 });
 
