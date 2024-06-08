@@ -14,6 +14,11 @@ const ProficiencyColumn = ({ level }) => {
         <p className="text-center pr-2">{profBonus}</p>
         <label>Proficiency Bonus</label>
       </div>
+      <div>
+        {/* Set up inspiration */}
+        {/* Set up saving throws */}
+        {/* Set up proficiencies */}
+      </div>
     </div>
   );
 }
