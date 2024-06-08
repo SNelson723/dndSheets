@@ -18,7 +18,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className='profile text-white py-5'>
+    <div className='profile py-5'>
       <div className="container-fluid header" style={{width: '50vw', minWidth: '50vw', textAlign: 'center'}}>
         <Container id="playerNav">
           {/* move this table into its own component and update with database */}
@@ -35,10 +35,10 @@ const Profile = () => {
       </div>
       <div id="profileBody" className="mt-5 mx-auto" style={{display: 'flex', justifyContent: 'center', width: '90vw', borderRadius: '10px'}}>
         <Stack direction="horizontal" gap="3" className="text-center" id="profile-sections">
-          <div id="body-left" className='mx-auto pr-3 text-white' style={{width: '30vw'}}>
+          <div id="body-left" className='mx-auto pr-3' style={{width: '30vw', display: 'flex'}}>
             {/* This is where stats and proficiencies will be held */}
           <BaseStatsTable />
-          <ProficiencyColumn />
+          <ProficiencyColumn level={character.level} />
           </div>
           <div id="body-right" className='mx-auto pl-3 text-white' style={{width: '60vw'}}>
             Right Side
