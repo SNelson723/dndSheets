@@ -50,6 +50,7 @@ const Profile = () => {
           </div>
         </Container>
       </div>
+
       <div id="profileBody" className="mt-3 mx-auto" style={{display: 'flex', justifyContent: 'center', width: '80vw', borderRadius: '10px'}}>
           <div id="body-left" className='mx-auto pr-3' style={{width: '100%', display: 'flex'}}>
             {/* This is where stats and proficiencies will be held */}
@@ -57,6 +58,7 @@ const Profile = () => {
           <ProficiencyColumn abilities={abilities} />
           </div>
       </div>
+
       {/* Maybe this is where skills and spells can be put and I can use a modal to popup with the required information! */}
     </div>
   );
