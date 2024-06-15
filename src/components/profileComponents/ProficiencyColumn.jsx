@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { setProficiencyMod, setModifiers } from "../../modifierFunctions";
 
 const ProficiencyColumn = ({ level, abilities }) => {
-  const bonus = setProficiencyMod(level);
   const [allSkills, setAllSkills] = useState([]);
 
   useEffect(() => {
@@ -14,7 +12,9 @@ const ProficiencyColumn = ({ level, abilities }) => {
 
   return (
     <div className="py-1 px-1">
+
       <div style={{display: 'flex'}}>
+
         {/* Set up saving throws */}
         <div style={{border: '1px solid black', borderRadius: '6px', height: '23vh'}}>
           <p className="text-center mt-1" style={{marginBottom: '1rem'}}>Saving Throws</p>
@@ -37,18 +37,6 @@ const ProficiencyColumn = ({ level, abilities }) => {
             <p style={{paddingBottom: '0'}}>{skill}</p>
           </div>
           ))}
-        </div>
-
-        <div style={{display: 'flex'}}>
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-            <p className="text-center px-2">{setProficiencyMod(level)}</p>
-            <label>Proficiency Bonus</label>
-          </div>
-
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-            <p className="text-center px-2">5</p>
-            <label>Inspiration</label>
-          </div>
         </div>
       </div>
     </div>
