@@ -27,7 +27,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className='profile py-5'>
+    <div className='profile py-4'>
       <div className="container-fluid header" style={{width: '50vw', minWidth: '50vw', textAlign: 'center'}}>
         <Container id="playerNav">
           {/* move this table into its own component and update with database */}
@@ -42,7 +42,7 @@ const Profile = () => {
           </div>
         </Container>
       </div>
-      <div id="profileBody" className="mt-5 mx-auto" style={{display: 'flex', justifyContent: 'center', width: '90vw', borderRadius: '10px'}}>
+      <div id="profileBody" className="mt-3 mx-auto" style={{display: 'flex', justifyContent: 'center', width: '80vw', borderRadius: '10px'}}>
           <div id="body-left" className='mx-auto pr-3' style={{width: '100%', display: 'flex'}}>
             {/* This is where stats and proficiencies will be held */}
           <BaseStatsTable abilities={abilities} />
