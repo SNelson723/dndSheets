@@ -11,13 +11,13 @@ const ProficiencyColumn = ({ level, abilities }) => {
   }, [])
 
   return (
-    <div className="py-1 px-1">
+    <div className="px-1">
 
       <div style={{display: 'flex'}}>
 
         {/* Set up saving throws */}
         <div className="my-3 me-3" style={{border: '1px solid black', borderRadius: '6px', height: '23vh', backgroundColor: 'azure'}}>
-          <p className="text-center mt-1" style={{marginBottom: '1rem'}}>Saving Throws</p>
+          <p className="text-center mt-1 title" style={{marginBottom: '1rem'}}>Saving Throws</p>
           {Object.entries(abilities).map(ability => (
             <div className="mx-2" key={`${ability[0]}_saving_throw`} style={{display: 'flex', justifyContent:'left', marginTop: '-1rem'}}>
               <label>+</label>
@@ -29,7 +29,7 @@ const ProficiencyColumn = ({ level, abilities }) => {
 
         {/* Set up proficiencies */}
         <div className="my-3 me-3" style={{border: '1px solid black', borderRadius: '6px', backgroundColor: 'azure'}}>
-          <p className="text-center mt-1" style={{marginBottom: '1rem'}}>Skills</p>
+          <p className="text-center mt-1 title" style={{marginBottom: '1rem'}}>Skills</p>
           {allSkills.map(skill => (
             <div className="mx-2" key={`${skill}_skill`} style={{display: 'flex', justifyContent:'left', marginTop: '-1rem'}}>
             <label>+</label>

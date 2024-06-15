@@ -24,9 +24,17 @@ td {
   margin-right: 4rem;
 }
 
+#hitPoints {
+  background: azure;
+  height: 12vh;
+  width: 15vw;
+  border-radius: 10px;
+}
+
 .card {
   //more translucent
-  background: #e9ecf313;
+  // background: #3369ff9c;
+  background: #00616186;
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   @include blur(4.2px);
@@ -54,4 +62,8 @@ td {
   margin-bottom: 0.5rem;
   border-radius: 10px;
   background-color: azure;
+}
+
+.title {
+  font-weight: bold;
 }

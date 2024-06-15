@@ -30,7 +30,7 @@ const Profile = () => {
           <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
             {Object.entries(character).map((label, i) => (
               <div key={`Character-${label[0]}`} className='mx-4'>
-                <label>{upperCaseFirstChar(label[0])}: </label>
+                <label style={{textDecoration: 'underline'}}>{upperCaseFirstChar(label[0])}: </label>
                 <br/>
                 {label[1]}
               </div>
@@ -52,10 +52,15 @@ const Profile = () => {
       </div>
 
       <div id="profileBody" className="mt-3 mx-auto card" style={{display: 'flex', justifyContent: 'center', width: '80vw', borderRadius: '10px'}}>
-          <div id="body-left" className='mx-auto pr-3' style={{width: '100%', display: 'flex', borderRadius: '6px'}}>
+          <div id="body" className='mx-auto pr-3' style={{width: '100%', display: 'flex', borderRadius: '6px'}}>
             {/* This is where stats and proficiencies will be held */}
           <BaseStatsTable abilities={abilities} />
           <ProficiencyColumn abilities={abilities} />
+            <div id="hitPoints" className="my-3 me-3">
+              <p className='title text-center mt-1' style={{marginBottom: '1rem'}}>Hit Points</p>
+              <p className='ms-1' style={{color: 'grey', marginTop: '-1rem', marginBottom: '0.5rem'}}>Hit Point Maximum<span className='ms-2' style={{textDecoration: 'underline'}}>12</span></p>
+              <p className='ms-1' style={{color: 'grey'}}>Current Hit Points<span className='ms-2' style={{textDecoration: 'underline'}}>12</span></p>
+            </div>
           </div>
       </div>
 
