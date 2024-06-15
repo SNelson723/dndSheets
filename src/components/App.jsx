@@ -4,7 +4,7 @@ import Profile from './Profile';
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App" style={{height: '100vh'}}>
       <Profile />
     </div>
   );

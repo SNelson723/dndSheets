@@ -43,17 +43,11 @@ const Profile = () => {
         </Container>
       </div>
       <div id="profileBody" className="mt-5 mx-auto" style={{display: 'flex', justifyContent: 'center', width: '90vw', borderRadius: '10px'}}>
-        <Stack direction="horizontal" gap="3" className="text-center" id="profile-sections">
-          <div id="body-left" className='mx-auto pr-3' style={{width: '30vw', display: 'flex'}}>
+          <div id="body-left" className='mx-auto pr-3' style={{width: '100%', display: 'flex'}}>
             {/* This is where stats and proficiencies will be held */}
           <BaseStatsTable abilities={abilities} />
           <ProficiencyColumn abilities={abilities} level={character.level} />
           </div>
-          <div id="body-right" className='mx-auto pl-3 text-white' style={{width: '60vw'}}>
-            Right Side
-            {/* This is where the gear, features will be held */}
-          </div>
-        </Stack>
       </div>
       {/* Maybe this is where skills and spells can be put and I can use a modal to popup with the required information! */}
     </div>

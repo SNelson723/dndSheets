@@ -10,7 +10,7 @@ const db = new Sequelize({
   dialect: 'mysql',
   username: 'root',
   database: 'dndSheets',
-  password: '',
+  password: 'WojtekCircus4126!',
 });
 
 db.authenticate()
