@@ -5,12 +5,12 @@ import { setModifiers } from '/src/modifierFunctions';
 
 const BaseStatsTable = ({ abilities }) => {
   return (
-    <div className='py-1' style={{width: '12vw'}}>
+    <div className='py-1' style={{width: '10vw'}}>
       {Object.entries(abilities).map(ability => (
         <div key={ability[0]} className="text-center mx-auto" style={{border: '2px solid black', width: '50%', height: '12vh'}}>
-            <p id={`profile-${ability[0]}`} style={{marginRight: '0.5rem'}}>{ability[0].substring(0, 3)}</p>
-            <h5>{ability[1]}</h5>
-            <p>{setModifiers(ability[1])}</p>
+            <p id={`profile-${ability[0]}`} style={{marginBottom: '0', marginTop: '0.7rem'}}>{ability[0].substring(0, 3)}</p>
+            <h5 style={{marginBottom: '0'}}>{ability[1]}</h5>
+            <p style={{marginRight: '2px'}}>{setModifiers(ability[1])}</p>
         </div>
       ))}
     </div>
