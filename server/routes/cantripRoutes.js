@@ -1,8 +1,7 @@
-// require express
 const express = require('express');
 const router = express.Router();
 
-// const Cantrips = require('../db/models/cantripsModel');
+const {Cantrips} = require('../db/models/cantripsModel');
 
 router.get('/', (req, res) => {
   Cantrips.findAll()

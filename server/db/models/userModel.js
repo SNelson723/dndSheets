@@ -47,4 +47,4 @@ const Stats = db.define('stat', {
   Charisma: DataTypes.INTEGER,
 });
 
-module.exports = { User, Stats};
+module.exports = { User, Stats };

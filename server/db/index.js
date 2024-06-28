@@ -47,20 +47,20 @@ const Skills = db.define('skill', {
   survival: DataTypes.INTEGER,
 });
 
-const Cantrips = db.define('cantrip', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  user_id: {
-    type: DataTypes.INTEGER,
-    reference: { model: User, key: 'id' },
-  },
-  cantripOne: DataTypes.STRING,
-  cantripTwo: DataTypes.STRING,
-  cantripThree: DataTypes.STRING,
-});
+// const Cantrips = db.define('cantrip', {
+//   id: {
+//     type: DataTypes.INTEGER,
+//     autoIncrement: true,
+//     primaryKey: true,
+//   },
+//   user_id: {
+//     type: DataTypes.INTEGER,
+//     reference: { model: User, key: 'id' },
+//   },
+//   cantripOne: DataTypes.STRING,
+//   cantripTwo: DataTypes.STRING,
+//   cantripThree: DataTypes.STRING,
+// });
 
 const Spells = db.define('spell', {
   id: {
@@ -90,6 +90,6 @@ module.exports = {
   // User,
   Skills,
   // Stats,
-  Cantrips,
+  // Cantrips,
   Spells
 }
