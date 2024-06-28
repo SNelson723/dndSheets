@@ -12,6 +12,7 @@ const cors = require('cors');
 
 //client path for bundled files
 const clientPath = path.resolve(__dirname, '../dist');
+
 // middleware
 app.use(cors());
 app.use(express.json());

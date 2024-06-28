@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 // successfully gets the spells
 router.get('/:user_id', (req, res) => {
   const user_id = Number(req.params.user_id);
-  Spells.findOne({ where: { user_id: user_id } })
+  Spells.findOne({ where: { user_id: user_id }, attributes: ['firstLvlOne', 'firstLvlTwo', 'firstLvlThree'] })
     .then(spells => res.status(200).send(spells))
     .catch(error => console.error(error));
 });
