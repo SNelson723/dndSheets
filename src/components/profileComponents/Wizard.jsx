@@ -11,6 +11,9 @@ const Wizard = ({userId}) => {
       .catch(err => console.error(err));
   }, []);
 
+  // add a modal for each cantrip/spell onclick event to use axios to access the
+  // dnd 5e api and present all information about them
+
   return (
     <div id="spellsKnown" className="my-3 me-3">
 
@@ -19,7 +22,11 @@ const Wizard = ({userId}) => {
         <table id="cantripsTable">
           <tbody>
             {/* map cantrips as tr => td */}
-            {}
+            {userId === 1 ?
+                <tr>
+                  {cantrips.map(cantrip => <td key={cantrip} className="mx-4 text-center">{cantrip}</td>)}
+                </tr>
+              : null}
           </tbody>
         </table>
       </div>
