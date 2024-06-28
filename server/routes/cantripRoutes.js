@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 // get all the user's cantrips
 router.get('/:user_id', (req, res) => {
   const user_id = Number(req.params.user_id);
-  Cantrips.findOne({ where: { user_id: user_id } })
+  Cantrips.findOne({ where: { user_id: user_id }, attributes: ['cantripOne', 'cantripTwo', 'cantripThree'] })
     .then((data) => res.status(200).send(data))
     .catch((error) => console.error(error));
 });

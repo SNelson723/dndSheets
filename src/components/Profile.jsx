@@ -3,12 +3,14 @@ import { Stack, Container } from 'react-bootstrap';
 import BaseStatsTable from './profileComponents/BaseStatsTable';
 import { useState, useEffect } from 'react';
 import ProficiencyColumn from './profileComponents/ProficiencyColumn';
+import Wizard from './profileComponents/Wizard';
 import axios from 'axios';
 import { upperCaseFirstChar, setProficiencyMod, setModifiers } from '../modifierFunctions';
 
 const Profile = () => {
   const [character, setCharacter] = useState({});
   const [abilities, setAbilities] = useState([]);
+  const userId = 1;
 
   useEffect(() => {
     // gonna need to change the 1 to the actual logged in user's id
@@ -64,27 +66,7 @@ const Profile = () => {
             </div>
           </div>
 
-          <div id="spellsKnown" className="my-3 me-3">
-
-            <div id="userCantrips">
-              <h6>Cantrips</h6>
-              <table id="cantripsTable">
-                <tbody>
-                  {/* map cantrips as tr => td */}
-                </tbody>
-              </table>
-            </div>
-
-            <div id="userSpells">
-              <h6>Spells</h6>
-              <div id="firstLvl">
-                <p style={{fontWeight: 'bolder'}}>1st-level spells</p>
-                <table id="spellsTable">
-
-                </table>
-              </div>
-            </div>
-          </div>
+          <Wizard userId={userId} />
         </div>
       </div>
 

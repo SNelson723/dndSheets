@@ -1,4 +1,16 @@
-const Wizard = () => {
+import React,  { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Wizard = ({userId}) => {
+  const [cantrips, setCantrips] = useState([]);
+  const [spells, setSpells] = useState([]);
+
+  useEffect(() => {
+    axios.get(`cantrips/${userId}`)
+      .then(({ data }) => setCantrips(Object.values(data)))
+      .catch(err => console.error(err));
+  }, []);
+
   return (
     <div id="spellsKnown" className="my-3 me-3">
 
@@ -7,6 +19,7 @@ const Wizard = () => {
         <table id="cantripsTable">
           <tbody>
             {/* map cantrips as tr => td */}
+            {}
           </tbody>
         </table>
       </div>
