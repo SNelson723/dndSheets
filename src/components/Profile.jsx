@@ -7,6 +7,11 @@ import Wizard from './profileComponents/Wizard';
 import axios from 'axios';
 import { upperCaseFirstChar, setProficiencyMod, setModifiers } from '../modifierFunctions';
 
+/**
+ * TODO: 
+ * Make level up it's own modal so I can insert/update new data in my database
+ */
+
 const Profile = () => {
   const [character, setCharacter] = useState({});
   const [abilities, setAbilities] = useState([]);
