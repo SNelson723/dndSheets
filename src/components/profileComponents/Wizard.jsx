@@ -22,6 +22,7 @@ const Wizard = ({userId}) => {
 
   const toggleModal = (query) => {
     // figure out how to pass in the spell or cantrip to get with axios from external api route
+    // Use the show method on the modal to pass in the query term for the spells/cantrips
   };
 
   // add a modal for each cantrip/spell onclick event to use axios to access the
