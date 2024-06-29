@@ -1,9 +1,11 @@
 import React,  { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Modal } from 'react-bootstrap';
 
 const Wizard = ({userId}) => {
   const [cantrips, setCantrips] = useState([]);
   const [spells, setSpells] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const level = 1;
 
@@ -18,6 +20,9 @@ const Wizard = ({userId}) => {
       .catch(err => console.error(err));
   }, []);
 
+  const toggleModal = (query) => {
+    // figure out how to pass in the spell or cantrip to get with axios from external api route
+  };
 
   // add a modal for each cantrip/spell onclick event to use axios to access the
   // dnd 5e api and present all information about them
