@@ -6,6 +6,7 @@ const Wizard = ({userId}) => {
   const [cantrips, setCantrips] = useState([]);
   const [spells, setSpells] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [currentHover, setCurrentHover] = useState('');
 
   const level = 1;
 
@@ -31,39 +32,15 @@ const Wizard = ({userId}) => {
   // do the above => cantrips and spells now rendering => handle the modals
 
   return (
-    <div id="spellsKnown" className="my-3 me-3 ps-2">
+    <div id="charInfo" className="my-3 me-3 px-2">
 
-      <div id="userCantrips" className="mt-1">
-        <h6>Cantrips</h6>
-        <table id="cantripsTable">
-          <tbody>
-            {/* map cantrips as tr => td */}
-            {level === 1 ?
-                <tr>
-                  {cantrips.map(cantrip => <td key={cantrip} style={{width: 'auto'}} className='text-center'>{cantrip} |</td>)}
-                </tr>
-              : null}
-          </tbody>
-        </table>
-      </div>
-
-      <div id="userSpells" className="mt-3">
-        <h6>Spells</h6>
-        <div id="firstLvl">
-
-          <table id="spellsTable">
-            <tbody>
-              {/* map spells as tr => td */}
-              {level === 1 ?
-                <tr>
-                  <td style={{fontWeight: 'bolder'}}>1st level |</td>
-                  {spells.map(spell => <td key={spell} style={{width: 'auto'}} className='text-center'> {spell} |</td>)}
-                </tr>
-                : null}
-            </tbody>
-          </table>
-
-        </div>
+      <div id="userCantrips" className="mt-1" style={{display: 'flex', justifyContent: 'space-evenly'}}>
+        <h6 onMouseEnter={() => setCurrentHover('Actions')} className={`${currentHover === 'Actions' && 'currentInfoHover'}`}>Actions</h6>
+        <h6 onMouseEnter={() => setCurrentHover('Spells')}  className={`${currentHover === 'Spells' && 'currentInfoHover'}`}>Spells</h6>
+        <h6 onMouseEnter={() => setCurrentHover('Inventory')}  className={`${currentHover === 'Inventory' && 'currentInfoHover'}`}>Inventory</h6>
+        <h6 onMouseEnter={() => setCurrentHover('FeatsTraits')}  className={`${currentHover === 'FeatsTraits' && 'currentInfoHover'}`}>Feats/Traits</h6>
+        <h6 onMouseEnter={() => setCurrentHover('Description')}  className={`${currentHover === 'Description' && 'currentInfoHover'}`}>Description</h6>
+        <h6 onMouseEnter={() => setCurrentHover('Notes')}  className={`${currentHover === 'Notes' && 'currentInfoHover'}`}>Notes</h6>
       </div>
     </div>
   );

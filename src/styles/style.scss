@@ -31,7 +31,7 @@ td {
   border-radius: 10px;
 }
 
-#spellsKnown {
+#charInfo {
   background: azure;
   border-radius: 10px;
   width: 30vw
@@ -72,4 +72,9 @@ td {
 
 .title {
   font-weight: bold;
+}
+
+
+.currentInfoHover {
+  text-decoration: underline;
 }

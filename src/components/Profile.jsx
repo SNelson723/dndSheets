@@ -8,7 +8,7 @@ import axios from 'axios';
 import { upperCaseFirstChar, setProficiencyMod, setModifiers } from '../modifierFunctions';
 
 /**
- * TODO: 
+ * TODO:
  * Make level up it's own modal so I can insert/update new data in my database
  */
 
@@ -32,7 +32,7 @@ const Profile = () => {
     <div className='profile py-4'>
       <div className="container-fluid header" style={{width: '50vw', minWidth: '50vw', textAlign: 'center'}}>
 
-        <Container id="playerNav">
+        <Container id="playerNav" style={{width: '100%'}}>
           {/* move this table into its own component and update with database */}
           <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
             {Object.entries(character).map((label, i) => (
