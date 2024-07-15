@@ -20,7 +20,9 @@ const Profile = () => {
   useEffect(() => {
     // gonna need to change the 1 to the actual logged in user's id
     axios.get('/user/1')
-      .then(({data}) => setCharacter(data))
+      .then(({data}) => {
+        setCharacter(data)
+      })
       .catch(error => console.error(error));
 
       axios.get('/user/stats/1')
@@ -28,7 +30,6 @@ const Profile = () => {
         .catch(error => console.error(error));
   }, []);
 
-  console.log(character);
   return (
     <div className='profile py-4'>
       <div className="container-fluid header" style={{width: '50vw', minWidth: '50vw', textAlign: 'center'}}>
@@ -36,13 +37,19 @@ const Profile = () => {
         <Container id="playerNav" style={{width: '100%'}}>
           {/* move this table into its own component and update with database */}
           <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-            {Object.entries(character).map((label, i) => (
-              <div key={`Character-${label[0]}`} className='mx-4'>
-                <label style={{textDecoration: 'underline'}}>{upperCaseFirstChar(label[0])}: </label>
-                <br/>
-                {label[1]}
-              </div>
-            ))}
+            {Object.entries(character).map((label, i) => {
+              if (i < 5) {
+                return (<div key={`Character-${label[0]}`} className='mx-4'>
+                    <label style={{textDecoration: 'underline'}}>{upperCaseFirstChar(label[0])}: </label>
+                    <br/>
+                    {label[1]}
+                  </div>)
+              } else {
+                return;
+              }
+
+            }
+            )}
           </div>
           <div style={{display: 'flex', marginTop: '0.5rem'}}>
 

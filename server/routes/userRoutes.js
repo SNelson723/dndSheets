@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 // successfully gets one specified user
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  User.findOne({ where: { id: id }, attributes: ['character', 'level', 'race', 'alignment', 'experience'] })
+  User.findOne({ where: { id: id }, attributes: ['character', 'level', 'race', 'alignment', 'experience', 'inventory', 'description', 'notes'] })
     .then(data => res.status(200).send(data))
     .catch(error => console.error(error));
 });
