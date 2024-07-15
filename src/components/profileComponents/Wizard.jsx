@@ -2,6 +2,7 @@ import React,  { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import SpellsCantrips from './wizardComponents/SpellsCantrips';
 import Actions from './allSharedCharComponents/Actions';
+import Inventory from './allSharedCharComponents/Inventory';
 
 const Wizard = ({ userId, description, notes, inventory }) => {
   const [showModal, setShowModal] = useState(false);
@@ -61,7 +62,7 @@ const Wizard = ({ userId, description, notes, inventory }) => {
       <div id="subInfoBody">
         {currentInfoTab === 'Actions' ? <Actions /> : null}
         {currentInfoTab === 'Spells' ? <SpellsCantrips userId={userId} /> : null}
-
+        {currentInfoTab === 'Inventory' ? <Inventory /> : null}
       </div>
     </div>
   );
