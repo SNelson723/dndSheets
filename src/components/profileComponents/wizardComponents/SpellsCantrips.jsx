@@ -16,8 +16,6 @@ const SpellsCantrips = ({ userId }) => {
       .catch(err => console.error(err));
   }, []);
 
-  console.log('Cantrips', cantrips);
-  console.log('Spells', spells);
   return (
     <div id="spellsBody">
       Spells and Cantrips

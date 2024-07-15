@@ -28,6 +28,7 @@ const Profile = () => {
         .catch(error => console.error(error));
   }, []);
 
+  console.log(character);
   return (
     <div className='profile py-4'>
       <div className="container-fluid header" style={{width: '50vw', minWidth: '50vw', textAlign: 'center'}}>
