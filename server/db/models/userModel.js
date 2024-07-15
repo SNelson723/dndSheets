@@ -26,6 +26,18 @@ const User = db.define('user', {
   experience: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
+  },
+  inventory: {
+    type: DataTypes.STRING(1000),
+    defaultValue: ''
+  },
+  description: {
+    type: DataTypes.STRING(1000),
+    defaultValue: '',
+  },
+  notes: {
+    type: DataTypes.STRING(1000),
+    defaultValue: ''
   }
 });
 
