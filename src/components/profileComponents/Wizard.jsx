@@ -1,6 +1,7 @@
 import React,  { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import SpellsCantrips from './wizardComponents/SpellsCantrips';
+import Actions from './allSharedCharComponents/Actions';
 
 const Wizard = ({ userId, description, notes, inventory }) => {
   const [showModal, setShowModal] = useState(false);
@@ -39,13 +40,13 @@ const Wizard = ({ userId, description, notes, inventory }) => {
           Inventory
         </h6>
         <h6
-        onClick={() => setCurrentInfoTab('FeatsTraits')}
+          onClick={() => setCurrentInfoTab('FeatsTraits')}
           className={`subInfoHeader ${currentInfoTab === 'FeatsTraits' && 'currentInfoTab'}`}
         >
           Feats/Traits
         </h6>
         <h6
-        onClick={() => setCurrentInfoTab('Description')}
+          onClick={() => setCurrentInfoTab('Description')}
           className={`subInfoHeader ${currentInfoTab === 'Description' && 'currentInfoTab'}`}
         >
           Description
@@ -58,8 +59,9 @@ const Wizard = ({ userId, description, notes, inventory }) => {
         </h6>
       </div>
       <div id="subInfoBody">
-        {/* {currentInfoTab === 'Spells' ? <SpellsCantrips userId={userId} /> : null} */}
-        <SpellsCantrips userId={userId} />
+        {currentInfoTab === 'Actions' ? <Actions /> : null}
+        {currentInfoTab === 'Spells' ? <SpellsCantrips userId={userId} /> : null}
+
       </div>
     </div>
   );
