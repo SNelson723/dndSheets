@@ -35,12 +35,48 @@ const Wizard = ({userId}) => {
     <div id="charInfo" className="my-3 me-3 px-2">
 
       <div id="userCantrips" className="mt-1" style={{display: 'flex', justifyContent: 'space-evenly'}}>
-        <h6 onMouseEnter={() => setCurrentHover('Actions')} className={`${currentHover === 'Actions' && 'currentInfoHover'}`}>Actions</h6>
-        <h6 onMouseEnter={() => setCurrentHover('Spells')}  className={`${currentHover === 'Spells' && 'currentInfoHover'}`}>Spells</h6>
-        <h6 onMouseEnter={() => setCurrentHover('Inventory')}  className={`${currentHover === 'Inventory' && 'currentInfoHover'}`}>Inventory</h6>
-        <h6 onMouseEnter={() => setCurrentHover('FeatsTraits')}  className={`${currentHover === 'FeatsTraits' && 'currentInfoHover'}`}>Feats/Traits</h6>
-        <h6 onMouseEnter={() => setCurrentHover('Description')}  className={`${currentHover === 'Description' && 'currentInfoHover'}`}>Description</h6>
-        <h6 onMouseEnter={() => setCurrentHover('Notes')}  className={`${currentHover === 'Notes' && 'currentInfoHover'}`}>Notes</h6>
+        <h6
+          onMouseLeave={() => setCurrentHover('')}
+          onMouseEnter={() => setCurrentHover('Actions')}
+          className={`${currentHover === 'Actions' && 'currentInfoHover'}`}
+        >
+          Actions
+        </h6>
+        <h6
+          onMouseLeave={() => setCurrentHover('')}
+          onMouseEnter={() => setCurrentHover('Spells')}
+          className={`${currentHover === 'Spells' && 'currentInfoHover'}`}
+        >
+          Spells
+        </h6>
+        <h6
+          onMouseLeave={() => setCurrentHover('')}
+          onMouseEnter={() => setCurrentHover('Inventory')}
+          className={`${currentHover === 'Inventory' && 'currentInfoHover'}`}
+        >
+          Inventory
+        </h6>
+        <h6
+          onMouseLeave={() => setCurrentHover('')}
+          onMouseEnter={() => setCurrentHover('FeatsTraits')}
+          className={`${currentHover === 'FeatsTraits' && 'currentInfoHover'}`}
+        >
+          Feats/Traits
+        </h6>
+        <h6
+          onMouseLeave={() => setCurrentHover('')}
+          onMouseEnter={() => setCurrentHover('Description')}
+          className={`${currentHover === 'Description' && 'currentInfoHover'}`}
+        >
+          Description
+        </h6>
+        <h6
+          onMouseLeave={() => setCurrentHover('')}
+          onMouseEnter={() => setCurrentHover('Notes')}
+          className={`${currentHover === 'Notes' && 'currentInfoHover'}`}
+        >
+          Notes
+        </h6>
       </div>
     </div>
   );
