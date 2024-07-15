@@ -2,7 +2,7 @@ import React,  { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import SpellsCantrips from './wizardComponents/SpellsCantrips';
 
-const Wizard = ({userId}) => {
+const Wizard = ({ userId, description, notes, inventory }) => {
   const [showModal, setShowModal] = useState(false);
   const [currentInfoTab, setCurrentInfoTab] = useState('Actions');
 

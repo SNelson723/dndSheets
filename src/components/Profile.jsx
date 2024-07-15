@@ -15,13 +15,19 @@ import { upperCaseFirstChar, setProficiencyMod, setModifiers } from '../modifier
 const Profile = () => {
   const [character, setCharacter] = useState({});
   const [abilities, setAbilities] = useState([]);
+  const [description, setDescription] = useState('');
+  const [notes, setNotes] = useState('');
+  const [inventory, setInventory] = useState('');
   const userId = 1;
 
   useEffect(() => {
     // gonna need to change the 1 to the actual logged in user's id
     axios.get('/user/1')
       .then(({data}) => {
-        setCharacter(data)
+        setCharacter(data);
+        setDescription(data.description);
+        setNotes(data.notes);
+        setInventory(data.inventory);
       })
       .catch(error => console.error(error));
 
@@ -44,12 +50,8 @@ const Profile = () => {
                     <br/>
                     {label[1]}
                   </div>)
-              } else {
-                return;
               }
-
-            }
-            )}
+            })}
           </div>
           <div style={{display: 'flex', marginTop: '0.5rem'}}>
 
@@ -79,7 +81,7 @@ const Profile = () => {
             </div>
           </div>
 
-          <Wizard userId={userId} />
+          <Wizard userId={userId} description={description} notes={notes} inventory={inventory} />
         </div>
       </div>
 
