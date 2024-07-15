@@ -3,6 +3,9 @@ import { Modal } from 'react-bootstrap';
 import SpellsCantrips from './wizardComponents/SpellsCantrips';
 import Actions from './allSharedCharComponents/Actions';
 import Inventory from './allSharedCharComponents/Inventory';
+import FeatsTraits from './allSharedCharComponents/FeatsTraits';
+import Description from './allSharedCharComponents/Description';
+import Notes from './allSharedCharComponents/Notes';
 
 const Wizard = ({ userId, description, notes, inventory }) => {
   const [showModal, setShowModal] = useState(false);
@@ -63,6 +66,9 @@ const Wizard = ({ userId, description, notes, inventory }) => {
         {currentInfoTab === 'Actions' ? <Actions /> : null}
         {currentInfoTab === 'Spells' ? <SpellsCantrips userId={userId} /> : null}
         {currentInfoTab === 'Inventory' ? <Inventory /> : null}
+        {currentInfoTab === 'FeatsTraits' ? <FeatsTraits /> : null}
+        {currentInfoTab === 'Description' ? <Description /> : null}
+        {currentInfoTab === 'Notes' ? <Notes /> : null}
       </div>
     </div>
   );
