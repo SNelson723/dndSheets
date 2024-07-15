@@ -21,23 +21,20 @@ router.get('/:id', (req, res) => {
 
 // successfully creates a character in MySQL db
 router.post('/', (req, res) => {
-  const { character, level, race, alignment } = req.body;
+  const { character, level, race, alignment, inventory, description, notes} = req.body;
   User.create({
     character: character,
     level: level,
     race: race,
     alignment: alignment,
     experience: 0,
+    inventory: inventory,
+    description: description,
+    notes: notes
   })
-    .then(newUser => {
-      console.log(newUser, 'Created successfully');
-      res.status(201).send(newUser);
-    })
-    .catch(() => {
-      res.sendStatus(500);
-    });
+    .then(newUser => res.status(201).send(newUser))
+    .catch(() => res.sendStatus(500));
 });
-
 
 // successfully updates character's level
 router.patch('/:id', (req, res) => {
