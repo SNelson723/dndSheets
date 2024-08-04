@@ -21,17 +21,37 @@ const Inventory = ({ inv }) => {
     damage_type: '',
     range: ''
   });
+  const [itemDetails, setItemDetails] = useState({
+    name: '',
+    desc: '',
+    category: '',
+  });
+  const [contents, setContents] = useState([]);
 
   useEffect(() => {
     setInventory(inv.split(', ').map(item => item.toLowerCase()));
   }, []);
 
-    const handleClose = () => setShowModal(false);
+    const handleClose = () => {
+      setShowModal(false);
+      setItemDetails({
+        name: '',
+        desc: '',
+        category: '',
+      });
+      setWeaponDetails({
+        equipment_category: '',
+        name: '',
+        damage_dice: '',
+        damage_type: '',
+        range: ''
+      });
+    }
     const handleOpen = () => setShowModal(true);
 
   const handleItemClick = (item) => {
     // Make the api call to get the data then open the modal
-    const param = item.split(' ').join('-');
+    const param = item.split(' ').join('-').replace("'", '');
 
     axios.get(`https://www.dnd5eapi.co/api/equipment/${param}`)
       .then(({ data }) => {
@@ -49,7 +69,16 @@ const Inventory = ({ inv }) => {
 
           // If looking at Adventuring gear
         } else if (data.equipment_category.index === 'adventuring-gear') {
-          console.log('howdy')
+          setItemDetails({
+            name: data.name,
+            desc: data.desc.flat(),
+            category: data.equipment_category.name
+          });
+          setInfoType('Adventuring Gear');
+        }
+
+        if (data.contents.length > 0) {
+          console.log(data.contents);
         }
       })
       .catch(err => console.error(err));
@@ -59,14 +88,25 @@ const Inventory = ({ inv }) => {
 
   return (
     <div>
-      <Modal show={showModal} onHide={handleClose} centered size="lg" aria-labelledby="contained-modal-title-vcenter">
+      <Modal show={showModal} onHide={handleClose} centered aria-labelledby="contained-modal-title-vcenter">
         <Modal.Header closeButton>
-          <Modal.Title>{weaponDetails.name}</Modal.Title>
+          <Modal.Title>{infoType === 'weapon' ? weaponDetails.name : itemDetails.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <p>Type: {weaponDetails.equipment_category}</p>
-            <p>Damage: {weaponDetails.damage_dice} {weaponDetails.damage_type} damage</p>
-            <p>Range: {weaponDetails.range}</p>
+            {infoType === 'weapon' ?
+            <>
+              <p>Type: {weaponDetails.equipment_category}</p>
+              <p>Damage: {weaponDetails.damage_dice} {weaponDetails.damage_type} damage</p>
+              <p>Range: {weaponDetails.range} feet</p>
+            </> : null}
+            {infoType === 'Adventuring Gear' ?
+            <>
+              <p>Type: {itemDetails.category}</p>
+              <p>{itemDetails.desc}</p>
+              <ul>
+                {contents.map((item, i) => <li key={`content_${i}`}></li>)}
+              </ul>
+            </> : null}
         </Modal.Body>
       </Modal>
       <div>
