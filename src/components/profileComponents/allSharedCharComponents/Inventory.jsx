@@ -104,7 +104,8 @@ const Inventory = ({ inv }) => {
               <p>Type: {itemDetails.category}</p>
               <p>{itemDetails.desc}</p>
               <ul>
-                {contents.map((item, i) => <li key={`content_${i}`}></li>)}
+                {/* Maybe add a plus/minus box next to the items so the player can keep count of these items */}
+                {contents.map((item, i) => <li key={`content_${i}`}>{item.quantity} - {item.item.index}</li>)}
               </ul>
             </> : null}
         </Modal.Body>
