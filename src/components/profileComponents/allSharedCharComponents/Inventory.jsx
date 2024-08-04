@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 /**
  * You can use https://www.dnd5eapi.co/api/equipment/spellbook for the spell book
@@ -11,11 +11,15 @@ import { Modal } from 'react-bootstrap';
 
 const Inventory = ({ inv }) => {
   const [inventory, setInventory] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const [itemDetails, setItemDetails] = useState({});
 
   useEffect(() => {
     setInventory(inv.split(', ').map(item => item.toLowerCase()));
   }, []);
+
+    const handleClose = () => setShowModal(false);
+    const handleOpen = () => setShowModal(true);
 
   const handleItemClick = (item) => {
     const param = item.split(' ').join('-');
@@ -30,6 +34,11 @@ const Inventory = ({ inv }) => {
 
   return (
     <div>
+      <div>
+        <Modal.Dialog>
+
+        </Modal.Dialog>
+      </div>
       <div>
         <h3 style={{textAlign: 'center'}}>Inventory</h3>
       </div>
