@@ -65,7 +65,7 @@ const Wizard = ({ userId, description, notes, inventory }) => {
       <div id="subInfoBody">
         {currentInfoTab === 'Actions' ? <Actions /> : null}
         {currentInfoTab === 'Spells' ? <SpellsCantrips userId={userId} /> : null}
-        {currentInfoTab === 'Inventory' ? <Inventory inv={inventory} /> : null}
+        {currentInfoTab === 'Inventory' ? <Inventory inv={inventory} userId={userId} /> : null}
         {currentInfoTab === 'FeatsTraits' ? <FeatsTraits /> : null}
         {currentInfoTab === 'Description' ? <Description /> : null}
         {currentInfoTab === 'Notes' ? <Notes /> : null}

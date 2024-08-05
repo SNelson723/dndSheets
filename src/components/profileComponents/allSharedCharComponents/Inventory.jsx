@@ -9,10 +9,11 @@ import { Modal, Button } from 'react-bootstrap';
  * to display that information?
  */
 
-const Inventory = ({ inv }) => {
+const Inventory = ({ inv, userId }) => {
   const [inventory, setInventory] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [infoType, setInfoType] = useState('');
+  const [item, setItem] = useState('');
   // // Modify this to weapons specifically and make another one for regular inventory
   const [weaponDetails, setWeaponDetails] = useState({
     equipment_category: '',
@@ -88,6 +89,9 @@ const Inventory = ({ inv }) => {
 
   const handleAddClick = () => {
     console.log('Add');
+    axios.patch(`http://localhost:3001/user/inventory/${userId}`, {inventory: item})
+      .then(({ data }) => setInventory(data.split(', ').map(item => item.toLowerCase())))
+      .catch(err => console.error(err));
   };
 
   const handleDeleteClick = () => {
@@ -126,6 +130,7 @@ const Inventory = ({ inv }) => {
           {inventory.map((item, i) => <li key={`inv-${i}`} onClick={() => handleItemClick(item)}>{item}</li>)}
         </ul>
       </div>
+      <input type='text' value={item} onChange={(e) => setItem(e.target.value)} />
       <Button variant='primary' onClick={handleAddClick}>Add</Button>
       <Button variant='danger' onClick={handleDeleteClick}>Delete</Button>
     </div>

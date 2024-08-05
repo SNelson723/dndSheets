@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
 });
 
 // successfully updates character's level
-router.patch('/:id', (req, res) => {
+router.patch('/level/:id', (req, res) => {
   const { id } = req.params;
   const { level, experience } = req.body;
   if (experience && level) {
@@ -55,6 +55,20 @@ router.patch('/:id', (req, res) => {
       .then(() => res.sendStatus(201))
       .catch(err => console.error(err));
   }
+});
+
+// update the character's inventory
+router.patch('/inventory/:id', (req, res) => {
+  const { id } = req.params;
+  const { inventory } = req.body;
+  User.findOne({ where: { id: id }, attributes: ['inventory'] })
+    .then(result => {
+      const updatedInventory = result.inventory + `, ${inventory}`
+      // console.log(updatedInventory);
+      User.update({inventory: updatedInventory}, {where: {id: id}})
+        .then(() => res.status(201).send(updatedInventory))
+        .catch(error => console.error(error));
+    })
 });
 
 // successfully deletes all user's data
