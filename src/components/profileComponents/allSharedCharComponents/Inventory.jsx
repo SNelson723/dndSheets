@@ -74,16 +74,24 @@ const Inventory = ({ inv }) => {
             desc: data.desc.flat(),
             category: data.equipment_category.name
           });
-          setInfoType('Adventuring Gear');
-        }
 
-        if (data.contents.length > 0) {
-          console.log(data.contents);
+          // If the Adventuring gear has contents, like a pack of some sort
+          if (data.contents.length > 0) {
+            setContents(data.contents);
+          }
+          setInfoType('Adventuring Gear');
         }
       })
       .catch(err => console.error(err));
-
       handleOpen();
+  };
+
+  const handleAddClick = () => {
+    console.log('Add');
+  };
+
+  const handleDeleteClick = () => {
+    console.log('Delete');
   };
 
   return (
@@ -105,7 +113,7 @@ const Inventory = ({ inv }) => {
               <p>{itemDetails.desc}</p>
               <ul>
                 {/* Maybe add a plus/minus box next to the items so the player can keep count of these items */}
-                {contents.map((item, i) => <li key={`content_${i}`}>{item.quantity} - {item.item.index}</li>)}
+                {contents.map((item, i) => <li key={`content_${i}`}>{item.quantity} - {item.item.name}</li>)}
               </ul>
             </> : null}
         </Modal.Body>
@@ -118,6 +126,8 @@ const Inventory = ({ inv }) => {
           {inventory.map((item, i) => <li key={`inv-${i}`} onClick={() => handleItemClick(item)}>{item}</li>)}
         </ul>
       </div>
+      <Button variant='primary' onClick={handleAddClick}>Add</Button>
+      <Button variant='danger' onClick={handleDeleteClick}>Delete</Button>
     </div>
   );
 };
