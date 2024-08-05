@@ -88,7 +88,7 @@ const Inventory = ({ inv, userId }) => {
   };
 
   const handleAddClick = () => {
-    console.log('Add');
+    // Check to see if you can find the input item in the dnd api before submitting the change
     axios.patch(`http://localhost:3001/user/inventory/${userId}`, {inventory: item})
       .then(({ data }) => setInventory(data.split(', ').map(item => item.toLowerCase())))
       .catch(err => console.error(err));
