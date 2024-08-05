@@ -14,7 +14,6 @@ const Inventory = ({ inv, userId }) => {
   const [showModal, setShowModal] = useState(false);
   const [infoType, setInfoType] = useState('');
   const [item, setItem] = useState('');
-  // // Modify this to weapons specifically and make another one for regular inventory
   const [weaponDetails, setWeaponDetails] = useState({
     equipment_category: '',
     name: '',
@@ -93,6 +92,7 @@ const Inventory = ({ inv, userId }) => {
      * TODO:
      * Actually, see if you can
      * 1) Make the call to the api with the item input and render a form modal
+     *    -- https://www.dnd5eapi.co/api/equipment/ITEM
      * 2) If there isn't any data that comes back => manual input
      * 3) If there is data that comes back => auto populate the fields
      * 4) Add the item to the inventory list (already done)
