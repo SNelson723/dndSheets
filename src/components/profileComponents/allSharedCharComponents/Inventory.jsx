@@ -33,22 +33,22 @@ const Inventory = ({ inv, userId }) => {
     setInventory(inv.split(', ').map(item => item.toLowerCase()));
   }, []);
 
-    const handleClose = () => {
-      setShowModal(false);
-      setItemDetails({
-        name: '',
-        desc: '',
-        category: '',
-      });
-      setWeaponDetails({
-        equipment_category: '',
-        name: '',
-        damage_dice: '',
-        damage_type: '',
-        range: ''
-      });
-    }
-    const handleOpen = () => setShowModal(true);
+  const handleClose = () => {
+    setShowModal(false);
+    setItemDetails({
+      name: '',
+      desc: '',
+      category: '',
+    });
+    setWeaponDetails({
+      equipment_category: '',
+      name: '',
+      damage_dice: '',
+      damage_type: '',
+      range: ''
+    });
+  };
+  const handleOpen = () => setShowModal(true);
 
   const handleItemClick = (item) => {
     // Make the api call to get the data then open the modal
@@ -56,7 +56,7 @@ const Inventory = ({ inv, userId }) => {
 
     axios.get(`https://www.dnd5eapi.co/api/equipment/${param}`)
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         // If looking at a weapon
         if (data.equipment_category.index === 'weapon') {
           setWeaponDetails({
@@ -89,6 +89,14 @@ const Inventory = ({ inv, userId }) => {
 
   const handleAddClick = () => {
     // Check to see if you can find the input item in the dnd api before submitting the change
+    /**
+     * TODO:
+     * Actually, see if you can
+     * 1) Make the call to the api with the item input and render a form modal
+     * 2) If there isn't any data that comes back => manual input
+     * 3) If there is data that comes back => auto populate the fields
+     * 4) Add the item to the inventory list (already done)
+     */
     axios.patch(`http://localhost:3001/user/inventory/${userId}`, {inventory: item})
       .then(({ data }) => setInventory(data.split(', ').map(item => item.toLowerCase())))
       .catch(err => console.error(err));
