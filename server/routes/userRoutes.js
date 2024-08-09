@@ -64,7 +64,6 @@ router.patch('/inventory/:id', (req, res) => {
   User.findOne({ where: { id: id }, attributes: ['inventory'] })
     .then(result => {
       const updatedInventory = result.inventory + `, ${inventory}`
-      // console.log(updatedInventory);
       User.update({inventory: updatedInventory}, {where: {id: id}})
         .then(() => res.status(201).send(updatedInventory))
         .catch(error => console.error(error));

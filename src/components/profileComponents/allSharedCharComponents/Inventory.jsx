@@ -2,18 +2,12 @@ import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 
-/**
- * You can use https://www.dnd5eapi.co/api/equipment/spellbook for the spell book
- * or any other piece of equipment the api has info on. Maybe try to get the info
- * via axios then if there is data brought back, make it a link that will open up a modal
- * to display that information?
- */
-
 const Inventory = ({ inv, userId }) => {
   const [inventory, setInventory] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [infoType, setInfoType] = useState('');
   const [item, setItem] = useState('');
+  const [grabbedItems, setGrabbedItems] = useState('');
   const [weaponDetails, setWeaponDetails] = useState({
     equipment_category: '',
     name: '',
@@ -81,22 +75,13 @@ const Inventory = ({ inv, userId }) => {
           setInfoType('Adventuring Gear');
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        // get the info from the table
+      });
       handleOpen();
   };
 
   const handleAddClick = (item) => {
-    // Check to see if you can find the input item in the dnd api before submitting the change
-    /**
-     * TODO:
-     * Actually, see if you can
-     * 1) Make the call to the api with the item input and render a form modal
-     *    -- https://www.dnd5eapi.co/api/equipment/ITEM
-     * 2) If there isn't any data that comes back => manual input
-     * 3) If there is data that comes back => auto populate the fields
-     * 4) Add the item to the inventory list (already done)
-     */
-
     const fixedItem = item.trim().split(' ').join('-').toLowerCase();
     axios.get(`https://www.dnd5eapi.co/api/equipment/${item}`)
       .then(({ data }) => {
@@ -108,6 +93,20 @@ const Inventory = ({ inv, userId }) => {
     axios.patch(`/user/inventory/${userId}`, {inventory: item})
       .then(({ data }) => setInventory(data.split(', ').map(item => item.toLowerCase())))
       .catch(err => console.error(err));
+  };
+
+  const grabbingItem = (item) => {
+    // if not in the grabbed items
+    const isChecked = document.getElementById(item).checked;
+
+    // when checked the first time => it is checked
+    if (isChecked) {
+      setGrabbedItems((prevState) => [...prevState, item])
+    } else {
+      // This is the second click that will make checked === false
+      let filtered = grabbedItems.filter(str => str !== item);
+      setGrabbedItems(filtered);
+    }
   };
 
   const handleDeleteClick = () => {
@@ -144,12 +143,21 @@ const Inventory = ({ inv, userId }) => {
       </div>
       <div className='mt-1'>
         <ul style={{overflowY: 'auto', maxHeight: '70%'}}>
-          {inventory.map((item, i) => <li key={`inv-${i}`} onClick={() => handleItemClick(item)}>{item}</li>)}
+          {inventory.map((item, i) => {
+            return (
+              <li key={`inv-${i}`}>
+                <input className="me-2" onClick={() => grabbingItem(item)} id={item} type='checkbox' />
+                <label onClick={() => handleItemClick(item)} htmlFor={item}>{item}</label>
+              </li>
+            );
+          })}
         </ul>
       </div>
       <input type='text' value={item} onChange={(e) => setItem(e.target.value)} />
-      <Button variant='primary' onClick={() =>handleAddClick(item)}>Add</Button>
-      <Button variant='danger' onClick={handleDeleteClick}>Delete</Button>
+      <div>
+        <Button variant='primary' onClick={() =>handleAddClick(item)}>Add</Button>
+        <Button variant='danger' onClick={handleDeleteClick}>Delete</Button>
+      </div>
     </div>
   );
 };
