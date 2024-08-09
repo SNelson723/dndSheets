@@ -55,7 +55,6 @@ const Inventory = ({ inv, userId }) => {
 
     axios.get(`https://www.dnd5eapi.co/api/equipment/${param}`)
       .then(({ data }) => {
-        // console.log(data);
         // If looking at a weapon
         if (data.equipment_category.index === 'weapon') {
           setWeaponDetails({
@@ -86,7 +85,7 @@ const Inventory = ({ inv, userId }) => {
       handleOpen();
   };
 
-  const handleAddClick = () => {
+  const handleAddClick = (item) => {
     // Check to see if you can find the input item in the dnd api before submitting the change
     /**
      * TODO:
@@ -97,13 +96,23 @@ const Inventory = ({ inv, userId }) => {
      * 3) If there is data that comes back => auto populate the fields
      * 4) Add the item to the inventory list (already done)
      */
-    axios.patch(`http://localhost:3001/user/inventory/${userId}`, {inventory: item})
+
+    const fixedItem = item.trim().split(' ').join('-').toLowerCase();
+    axios.get(`https://www.dnd5eapi.co/api/equipment/${item}`)
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch(err => {
+        // if no data, that should be fine
+      });
+    axios.patch(`/user/inventory/${userId}`, {inventory: item})
       .then(({ data }) => setInventory(data.split(', ').map(item => item.toLowerCase())))
       .catch(err => console.error(err));
   };
 
   const handleDeleteClick = () => {
     console.log('Delete');
+    axios.delete()
   };
 
   return (
@@ -139,7 +148,7 @@ const Inventory = ({ inv, userId }) => {
         </ul>
       </div>
       <input type='text' value={item} onChange={(e) => setItem(e.target.value)} />
-      <Button variant='primary' onClick={handleAddClick}>Add</Button>
+      <Button variant='primary' onClick={() =>handleAddClick(item)}>Add</Button>
       <Button variant='danger' onClick={handleDeleteClick}>Delete</Button>
     </div>
   );
