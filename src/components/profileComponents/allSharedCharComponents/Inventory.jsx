@@ -96,22 +96,23 @@ const Inventory = ({ inv, userId }) => {
   };
 
   const grabbingItem = (item) => {
-    // if not in the grabbed items
-    const isChecked = document.getElementById(item).checked;
+    // grab the input
+    const checked = document.getElementById(item).checked;
 
-    // when checked the first time => it is checked
-    if (isChecked) {
-      setGrabbedItems((prevState) => [...prevState, item])
+    // if the input is checked => it won't be in the array so push
+    if (checked) {
+      setGrabbedItems((prevState) => [...prevState, item]);
+
+      // else if checked  false => it's already in the array so filter it out
     } else {
-      // This is the second click that will make checked === false
       let filtered = grabbedItems.filter(str => str !== item);
       setGrabbedItems(filtered);
     }
   };
 
   const handleDeleteClick = () => {
-    console.log('Delete');
-    axios.delete()
+    console.log(grabbedItems);
+    // axios.delete()
   };
 
   return (
