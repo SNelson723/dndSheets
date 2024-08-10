@@ -7,7 +7,7 @@ const Inventory = ({ inv, userId }) => {
   const [showModal, setShowModal] = useState(false);
   const [infoType, setInfoType] = useState('');
   const [item, setItem] = useState('');
-  const [grabbedItems, setGrabbedItems] = useState('');
+  const [grabbedItems, setGrabbedItems] = useState([]);
   const [weaponDetails, setWeaponDetails] = useState({
     equipment_category: '',
     name: '',
@@ -81,20 +81,17 @@ const Inventory = ({ inv, userId }) => {
       handleOpen();
   };
 
+  // adds to the inventory
   const handleAddClick = (item) => {
-    const fixedItem = item.trim().split(' ').join('-').toLowerCase();
-    axios.get(`https://www.dnd5eapi.co/api/equipment/${item}`)
+    axios.patch(`/user/inventory/${userId}`, {inventory: item, update: 'add'})
       .then(({ data }) => {
-        console.log(data);
+        setItem('');
+        setInventory(data.split(', ').map(item => item.toLowerCase()));
       })
-      .catch(err => {
-        // if no data, that should be fine
-      });
-    axios.patch(`/user/inventory/${userId}`, {inventory: item})
-      .then(({ data }) => setInventory(data.split(', ').map(item => item.toLowerCase())))
       .catch(err => console.error(err));
   };
 
+  // grabs items
   const grabbingItem = (item) => {
     // grab the input
     const checked = document.getElementById(item).checked;
@@ -110,9 +107,15 @@ const Inventory = ({ inv, userId }) => {
     }
   };
 
+  // removes the selected items in Inventory
   const handleDeleteClick = () => {
-    console.log(grabbedItems);
-    // axios.delete()
+    // filter out the grabbed Items from the inventory array => separate var
+    const updatedInventory = inventory.filter(item => grabbedItems.indexOf(item) === -1).join(', ');
+
+    // make the call and send back the newly updated list => update inventory state variable
+    axios.patch(`/user/inventory/${userId}`, {inventory: updatedInventory, update: 'remove'})
+    .then(({ data }) => setInventory(data.split(', ')))
+    .catch(err => console.error(err));
   };
 
   return (

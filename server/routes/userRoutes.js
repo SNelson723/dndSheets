@@ -60,14 +60,21 @@ router.patch('/level/:id', (req, res) => {
 // update the character's inventory
 router.patch('/inventory/:id', (req, res) => {
   const { id } = req.params;
-  const { inventory } = req.body;
-  User.findOne({ where: { id: id }, attributes: ['inventory'] })
-    .then(result => {
-      const updatedInventory = result.inventory + `, ${inventory}`
-      User.update({inventory: updatedInventory}, {where: {id: id}})
-        .then(() => res.status(201).send(updatedInventory))
-        .catch(error => console.error(error));
-    })
+  const { inventory, update } = req.body;
+  if (update === 'add') {
+    User.findOne({ where: { id: id }, attributes: ['inventory'] })
+      .then(result => {
+        const updatedInventory = result.inventory + `, ${inventory}`;
+        User.update({inventory: updatedInventory}, {where: {id: id}})
+          .then(() => res.status(201).send(updatedInventory))
+          .catch(error => console.error(error));
+      })
+      .catch(err => console.error(err));
+  } else if (update === 'remove') {
+    User.update({inventory: inventory}, {where: {id: id}})
+      .then(() => res.status(201).send(inventory))
+      .catch(err => console.error(err));
+  }
 });
 
 // successfully deletes all user's data
