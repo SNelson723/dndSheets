@@ -2,6 +2,14 @@ import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 
+/**
+ * TODO:
+ * 1) make another component => pass the clicked item into it
+ * 2) that new component is where the item's information will render
+ * 3) Add CRUD operations there
+ * 4) Leave Inventory.jsx as close to read only as you can
+ */
+
 const Inventory = ({ inv, userId }) => {
   const [inventory, setInventory] = useState([]);
   const [showModal, setShowModal] = useState(false);
