@@ -39,7 +39,7 @@ const setProficiencyMod = (lvl) => {
 };
 
 const upperCaseFirstChar = (word) => {
-  return word.substring(0, 1).toUpperCase() + word.substring(1, word.length)
+  return word.substring(0, 1).toUpperCase() + word.substring(1, word.length);
 };
 
 module.exports = {

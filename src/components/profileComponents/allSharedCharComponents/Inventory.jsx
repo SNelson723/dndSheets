@@ -2,8 +2,7 @@ import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 
-/**
- * TODO:
+/* TODO:
  * 1) make another component => pass the clicked item into it
  * 2) that new component is where the item's information will render
  * 3) Add CRUD operations there
@@ -58,6 +57,7 @@ const Inventory = ({ inv, userId }) => {
     axios.get(`https://www.dnd5eapi.co/api/equipment/${param}`)
       .then(({ data }) => {
         // If looking at a weapon
+        console.log(data);
         if (data.equipment_category.index === 'weapon') {
           setWeaponDetails({
             equipment_category: data.category_range,
@@ -83,9 +83,7 @@ const Inventory = ({ inv, userId }) => {
           setInfoType('Adventuring Gear');
         }
       })
-      .catch(err => {
-        // get the info from the table
-      });
+      .catch(err => console.error(err));
       handleOpen();
   };
 
