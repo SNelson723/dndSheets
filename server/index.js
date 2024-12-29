@@ -32,7 +32,7 @@ app.use('/api', externalApi);
 // serve up static files from the client path
 app.use(express.static(clientPath));
 
-const PORT = 3001;
+const PORT = 3000;
 
 app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
